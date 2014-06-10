@@ -1,0 +1,50 @@
+```{r echo=FALSE}
+opts_chunk$set(fig.width = 15)
+suppressPackageStartupMessages(require(ggplot2))
+suppressPackageStartupMessages(require(plyr))
+suppressPackageStartupMessages(require(rpart))
+suppressPackageStartupMessages(require(randomForest))
+suppressPackageStartupMessages(require(data.table))
+suppressPackageStartupMessages(require(lubridate))
+suppressPackageStartupMessages(source("../Scripts/label-and-disambiguate.R"))
+suppressPackageStartupMessages(source("../Scripts/run-analysis.R"))
+
+set.seed(1)
+```
+
+```{r}
+USSRLabel <- prepareAnnotatedModel("../USSR//20131219_005_results-scored-annotated.fix.csv")
+USSRData <- loadDir("../USSR/", includeAnno=F)
+
+labelForest <- randomForest(complexModelFormulaWithInteractions, USSRLabel, mtry=6, ntree = 5000, importance = T)
+
+newLabels <- lapply(USSRData, function(dataSet){
+  dataSet$call <- predict(labelForest, dataSet)
+  fit <- randomForest(complexModelFormulaWithInteractions, dataSet, mtry=6, ntree = 5000, importance = T)
+  list(check = checkModel(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type="prob")),
+       fNeg = getFalseNegatives(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type="prob")),
+       fPos = getFalsePositives(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type="prob")))
+  
+})
+
+errorTable <- as.data.frame(do.call(rbind, lapply(newLabels, function(x){unlist(x$check)})))
+
+ggplot(errorTable, aes(size = TruePositive/.numYes,  y = FalsePositive, x = FalseNegative, color = ErrorRate)) + geom_point() + scale_size(range = c(4,10))
+```
+
+```{r fig.width=12, fig.height=12}
+falseNegatives <- lapply(newLabels, function(x){
+  mod <- model.frame(complexModelFormulaWithInteractions,x[["fNeg"]])
+  x[["fNeg"]] <- name_rows(x[["fNeg"]])
+  print(x[["fNeg"]][,c('.rownames','Yes', "Notes")])
+  x[["fNeg"]]
+})
+
+falsePositives <- lapply(newLabels, function(x){
+  mod <- model.frame(complexModelFormulaWithInteractions,x[["fPos"]])
+  x[["fPos"]] <- name_rows(x[["fPos"]])
+  print(x[["fPos"]][,c('.rownames','Yes', "Notes")])
+  x[["fPos"]]
+})
+```
+

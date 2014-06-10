@@ -1,0 +1,87 @@
+```{r echo=FALSE}
+opts_chunk$set(fig.width = 15)
+suppressPackageStartupMessages(require(ggplot2))
+suppressPackageStartupMessages(require(plyr))
+suppressPackageStartupMessages(require(rpart))
+suppressPackageStartupMessages(require(randomForest))
+suppressPackageStartupMessages(require(data.table))
+suppressPackageStartupMessages(require(lubridate))
+suppressPackageStartupMessages(source("../Scripts/label-and-disambiguate.R"))
+suppressPackageStartupMessages(source("../Scripts/run-analysis.R"))
+
+AGPLabel <- prepareAnnotatedModel("../AGP//20130701_002_results-scored-annotated.fix.csv")
+USSRLabel <- prepareAnnotatedModel("../USSR//20131219_005_results-scored-annotated.fix.csv")
+SolomonLabel <- prepareAnnotatedModel("../Solomon Islands//20131222_004_results-scored-annotated.fix.csv")
+set.seed(1)
+```
+
+## Set Parameters
+```{r}
+N = 150
+K = .30
+```
+
+
+## Generate training and testing data sets for leave K% out cross-validation.
+
+```{r dataPartitions, cache=F}
+dataPartitions <- lapply(LETTERS[1:N], function(i){
+  USSRLabel$randu <- runif(nrow(USSRLabel), 0, 1)
+  trainData <- USSRLabel[USSRLabel$randu > K,]
+  testData <- USSRLabel[USSRLabel$randu <= K,]
+  return(list(trainData = trainData, testData = testData))
+})
+names(dataPartitions) <- paste(LETTERS,1:N,sep='')
+```
+
+```{r fitAndCheck}
+fitAndCheck <- lapply(dataPartitions, function(dataSet){
+  fitForest <- randomForest(complexModelFormulaWithInteractions, dataSet$trainData, mtry=6, ntree=5000, importance=T)
+  pred <- predict(fitForest, dataSet$testData, type='prob')
+  check <- checkModel(dataSet$testData, pred)
+  return(list(check = check, fit = fitForest))
+})
+
+totalFit <- randomForest(complexModelFormulaWithInteractions, USSRLabel, mtry=6, ntree=5000, importance=T)
+totalPred <- predict(totalFit, USSRLabel, type='prob')
+totalCheck <- as.data.frame(checkModel(USSRLabel, totalPred))
+totalCheck$type <- "Total"
+
+fitTable <- as.data.frame(do.call(rbind, lapply(fitAndCheck, function(fc)unlist(fc$check))))
+fitTable$type <- "K-out"
+fitTable <- rbind(fitTable, totalCheck)
+ggplot(rbind(fitTable, totalCheck), aes(size = TruePositive/.numYes,  y = FalsePositive, x = FalseNegative, color = ErrorRate, shape = type)) + geom_point() + scale_size(range = c(4,10)) + labs(title = "USSR label prediction by leave K out fits")
+```
+
+```{r crossSolomonTests}
+bestFitIDs <- row.names(fitTable[fitTable$ErrorRate < 0.15, ])
+print(bestFitIDs)
+bestFits <- lapply(bestFitIDs, function(i){
+  if(i %in% names(fitAndCheck)){fitAndCheck[[i]]$fit}
+  else {totalFit}
+})
+
+names(bestFits) <- bestFitIDs
+
+SolomonTests <- lapply(bestFits, function(f){
+  checkModel(SolomonLabel, predict(f, SolomonLabel, type="prob"))
+})
+
+SolomonTestTable <- as.data.frame(do.call(rbind, lapply(SolomonTests, unlist)))
+row.names(SolomonTestTable) <- bestFitIDs
+SolomonTestTable$type <- fitTable[fitTable$ErrorRate < 0.15, "type"]
+ggplot(SolomonTestTable, aes(size = TruePositive/.numYes,  y = FalsePositive, x = FalseNegative, color = ErrorRate, shape = type)) + geom_point() + scale_size(range = c(4,10)) + labs(title = "Solomon Islands label prediction by best performing USSR predictors")
+```
+
+```{r}
+STT <- as.data.table(name_rows(SolomonTestTable))
+bestAcrossFitIDs <- STT[(FalseNegative < 12) & (TruePositive/.numYes > 0.84) & type != "Total", .rownames]
+ggplot(STT[(FalseNegative < 12) & (TruePositive/.numYes > 0.84) & type != "Total",], aes(size = TruePositive/.numYes,  y = FalsePositive, x = FalseNegative, color = ErrorRate, shape = type)) + geom_point() + scale_size(range = c(4,10))
+
+
+bestData <- dataPartitions[bestAcrossFitIDs]
+bestForests <- bestFits[bestAcrossFitIDs]
+saveRDS(list(data =  bestData, models = bestForests), paste("../SavedData/leave-k-out-crossvalidate-USSR-", format(now(), format="%Y-%m-%d_%H-%M-%S"),".RDS", sep = ''))
+
+```
+
