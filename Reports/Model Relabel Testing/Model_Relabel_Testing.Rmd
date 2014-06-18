@@ -1,0 +1,109 @@
+---
+title: "Relabel Testing"
+author: "Joshua Klein"
+date: "Tuesday, June 17, 2014"
+output:
+  html_document:
+    fig_height: 8
+    fig_width: 8
+    number_sections: yes
+    theme: journal
+    toc: yes
+---
+# Model Fit Test
+```{r imports, include=FALSE}
+require(knitr)
+opts_chunk$set(fig.width = 15)
+(require(ggplot2))
+(require(plyr))
+(require(rpart))
+(require(randomForest))
+(require(data.table))
+(require(lubridate))
+(source("../../Scripts/label-and-disambiguate.R"))
+(source("../../Scripts/run-analysis.R"))
+
+set.seed(1)
+```
+
+```{r %sCHUNK_LABEL_HERE}
+```
+
+```{r defaults, echo=FALSE}
+if(!exists("testFormula")){
+  testFormula = complexModelFormula
+  print("default formula")
+}
+print(paste("testFormula", testFormula))
+if(!exists("mtry")){
+  mtry = 5
+  print("default mtry")
+}
+print(paste("mtry", mtry))
+if(!exists("ntree")){
+  ntree = 5000
+  print("default ntree")
+}
+print(paste("ntree", ntree))
+```
+
+## Load Data
+```{r load-data, cache=TRUE}
+USSRLabel <- prepareAnnotatedModel("../../USSR//20131219_005_results-scored-annotated.fix.csv")
+SolomonLabel <- prepareAnnotatedModel("../../Solomon Islands//20131222_004_results-scored-annotated.fix.csv")
+SouthCarolinaLabel <- prepareAnnotatedModel("../../South Carolina//20131220_002_results-scored-annotated.fix.csv")
+
+labelData <- list(USSRLabel = USSRLabel, SolomonLabel = SolomonLabel, 
+                  SouthCarolinaLabel = SouthCarolinaLabel, Merged = 
+                    rbind(model.frame(testFormula, USSRLabel), model.frame(testFormula, SolomonLabel), model.frame(testFormula, SouthCarolinaLabel)))
+
+#USSRData <- loadDir("../../USSR/", includeAnno = F)
+#SolomonData <- loadDir("../../Solomon Islands//", includeAnno = F)
+#SouthCarolina <- loadDir("../../South Carolina/", includeAnno = F)
+```
+
+## Fit Forests on Labeled Data
+```{r fit-forests}
+
+print(names(labelData))
+labelForests <- lapply(names(labelData), function(d){
+  rf <- randomForest(formula = testFormula,data = labelData[[d]], mtry = mtry, ntree = ntree, importance = T)
+  varImpPlot(rf, main = d)
+  return(rf)
+})
+
+names(labelForests) <- names(labelData)
+```
+
+```{r tests}
+newLabels <- lapply(labelData, function(dataSet){
+  lapply(labelForests, function(fit){
+      list(check = checkModel(dataSet=dataSet, modelPred=predict(fit, dataSet, type="prob"))
+           #,
+#        fNeg = getFalseNegatives(dataSet=dataSet, modelPred=predict(fit, dataSet, type="prob")),
+#        fPos = getFalsePositives(dataSet=dataSet, modelPred=predict(fit, dataSet, type="prob")),
+#        tPos = getTruePositives(dataSet=dataSet, modelPred=predict(fit, dataSet, type="prob")),
+#        tNeg = getTrueNegatives(dataSet=dataSet, modelPred=predict(fit, dataSet, type="prob"))
+       )
+  })  
+})
+
+newLabels <- unlist(newLabels, recursive = F)
+```
+
+
+```{r error-table, results='asis'}
+errorTable <- as.data.frame(do.call(rbind, lapply(newLabels, function(x){unlist(x$check)})))
+errorTable <- name_rows(errorTable)
+errorTable$TPR <- with(errorTable, TruePositive/(TruePositive + FalseNegative))
+errorTable <- arrange(errorTable, TPR, -FPR)
+
+kable(errorTable)
+```
+
+```{r error-plot}
+ggplot(errorTable, aes(size = TruePositive/.numYes,  y = FalsePositive, x = FalseNegative, color = ErrorRate, label = zapsmall(TruePositive/.numYes, 3))) + geom_point() + scale_size(range = c(4,10))
+
+ggplot(errorTable, aes(y = TPR, x = FPR, size = ErrorRate, color = .rownames)) + geom_point(position="jitter") + scale_size(range = c(4,10)) 
+```
+

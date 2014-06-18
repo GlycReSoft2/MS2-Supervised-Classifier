@@ -110,6 +110,7 @@ prepareModel <- function(modelFile, readFile = T, call = T){
     rawDataSet <- modelFile
   }
   nOxDataSet <- numOxoniumIons(rawDataSet)
+  nOxDataSet$abs_ppm_error <- abs(nOxDataSet$ppm_error)
   nStubsDataSet <- numStubs(nOxDataSet)
   preparedDataSet <- getIonCoverageScore(nStubsDataSet)
   if(call){
@@ -135,6 +136,7 @@ prepareAnnotatedModel <- function(modelFile, readFile = T, drop = T){
     cleanDataSet <- rawDataSet
   }
   calledDataSet <- selectCoverage(cleanDataSet)
+  calledDataSet$abs_ppm_error <- abs(calledDataSet$ppm_error)
   preparedDataSet <- getIonCoverageScore(
     numOxoniumIons(
       numStubs(
@@ -146,27 +148,26 @@ prepareAnnotatedModel <- function(modelFile, readFile = T, drop = T){
   return(preparedDataSet)  
 }
 
-#' Columns of interest to the model 
-modelColumns <- c("call", "bestCoverage", "numStubs", "ppm_error")
-modelColumnExtras <- c("Peptide")
-modelFormula <- as.formula(paste(modelColumns[1], 
-                                 do.call(paste, as.list(c(modelColumns[-1], sep = '+'))), 
-                                 sep = '~'))
-
 # complexModelFormula <- call ~ numOxIons + X.percent_b.ion_coverage + 
 #   X.percent_y.ion_coverage + X.b_ion_with_HexNAc_coverage + 
 #   X.y_ion_with_HexNAc_coverage +  numStubs + peptideLens
 
-complexModelFormula <- call ~ X.percent_b.ion_coverage + 
-  X.percent_y.ion_coverage + X.b_ion_with_HexNAc_coverage + 
-  X.y_ion_with_HexNAc_coverage +  numStubs + peptideLens + 
-  ppm_error + meanCoverage + percentUncovered
+# complexModelFormula <- call ~ X.percent_b.ion_coverage + 
+#   X.percent_y.ion_coverage + X.b_ion_with_HexNAc_coverage + 
+#   X.y_ion_with_HexNAc_coverage +  numStubs + peptideLens + 
+#   ppm_error + meanCoverage + percentUncovered
 
-complexModelFormulaWithInteractions <- call ~ X.percent_b.ion_coverage * 
-  X.percent_y.ion_coverage * X.b_ion_with_HexNAc_coverage * 
-  X.y_ion_with_HexNAc_coverage *  numStubs * peptideLens * 
-  ppm_error * meanCoverage * percentUncovered
+complexModelFormula <- call ~ meanCoverage + percentUncovered + abs_ppm_error + X.b_ion_with_HexNAc_coverage + 
+  X.y_ion_with_HexNAc_coverage + numStubs + peptideLens 
 
+# complexModelFormulaWithInteractions <- call ~ X.percent_b.ion_coverage * 
+#   X.percent_y.ion_coverage * X.b_ion_with_HexNAc_coverage * 
+#   X.y_ion_with_HexNAc_coverage *  numStubs * peptideLens * 
+#   ppm_error * meanCoverage * percentUncovered
+
+complexModelFormulaWithInteractions <- call ~ meanCoverage * percentUncovered *
+  X.b_ion_with_HexNAc_coverage * X.y_ion_with_HexNAc_coverage * 
+  numStubs * peptideLens * ppm_error
 
 #' Fits a model on the dataset
 fitModel <- function(dataSet, modelFormula = modelFormula){
@@ -206,6 +207,7 @@ checkModel <- function(dataSet, modelPred, threshold = 0.5, percent = F){
   
   errorTable[[".numNo"]]  <- sum(dataSet$call == "No")
   errorTable[[".numYes"]] <- sum(dataSet$call == "Yes")
+  #errorTable[["TPR"]]  <- errorTable$Yes.Yes / (errorTable$Yes.Yes + errorTable$No.Yes)
   errorTable[["FPR"]]  <- errorTable$Yes.No / (errorTable$Yes.No + errorTable$No.No)
   errorTable[["FDR"]]  <- errorTable[["FPR"]] / (errorTable[["FPR"]] + errorTable$Yes.Yes)
   errorTable[["ErrorRate"]] <- (errorTable$No.Yes + errorTable$Yes.No) / nrow(dataSet)
@@ -216,6 +218,9 @@ checkModel <- function(dataSet, modelPred, threshold = 0.5, percent = F){
   
   return(errorTable)
 }
+
+#' Given a dataset with known information and a model's prediction about
+#' class labels, label the false positives
 getFalsePositives <- function(dataSet, modelPred, threshold = 0.5){
   predCall <- apply(modelPred, 1, function(row){
     (row["No"] < row["Yes"]) && (row["Yes"] >= threshold)
@@ -227,8 +232,35 @@ getFalsePositives <- function(dataSet, modelPred, threshold = 0.5){
   fPos <- apply(cmprCalls, 1, function(row){
     (row[[1]] == "Yes") && (row[[2]] == "No")
   })
-  return(cbind(dataSet[fPos,], modelPred[fPos,]))
+  
+  res <- cbind(dataSet[fPos,], modelPred[fPos,])
+  names(res)[length(names(res))] <- "fPos"
+  
+  return(res)   
 }
+
+#' Given a dataset with known information and a model's prediction about
+#' class labels, label the true positives
+getTruePositives <- function(dataSet, modelPred, threshold = 0.5){
+  predCall <- apply(modelPred, 1, function(row){
+    (row["No"] < row["Yes"]) && (row["Yes"] >= threshold)
+  })
+  predCall <- labelCall(predCall)
+  cmprCalls <- data.frame(predCall = predCall, 
+                          trueCall = dataSet$call)
+  
+  fPos <- apply(cmprCalls, 1, function(row){
+    (row[[1]] == "Yes") && (row[[2]] == "Yes")
+  })
+  
+  res <- cbind(dataSet[fPos,], modelPred[fPos,])
+  names(res)[length(names(res))] <- "tPos"
+  
+  return(res)   
+}
+
+#' Given a dataset with known information and a model's prediction about
+#' class labels, label the false negatives
 getFalseNegatives <- function(dataSet, modelPred, threshold = 0.5){
   predCall <- apply(modelPred, 1, function(row){
     (row["No"] < row["Yes"]) && (row["Yes"] >= threshold)
@@ -240,9 +272,33 @@ getFalseNegatives <- function(dataSet, modelPred, threshold = 0.5){
   fNeg <- apply(cmprCalls, 1, function(row){
     (row[[1]] == "No") && (row[[2]] == "Yes")
   })
-  return(cbind(dataSet[fNeg,], modelPred[fNeg,]))
+  
+  res <- cbind(dataSet[fNeg,], modelPred[fNeg,])
+  names(res)[length(names(res))] <- "fNeg"
+  
+  return(res)
 }
 
+
+#' Given a dataset with known information and a model's prediction about
+#' class labels, label the true negatives
+getTrueNegatives <- function(dataSet, modelPred, threshold = 0.5){
+  predCall <- apply(modelPred, 1, function(row){
+    (row["No"] > row["Yes"]) && (row["No"] >= threshold)
+  })
+  predCall <- labelCall(predCall)
+  cmprCalls <- data.frame(predCall = predCall, 
+                          trueCall = dataSet$call)
+  
+  tNeg <- apply(cmprCalls, 1, function(row){
+    (row[[1]] == "No") && (row[[2]] == "No")
+  })
+  
+  res <- cbind(dataSet[tNeg,], modelPred[tNeg,])
+  names(res)[length(names(res))] <- "tNeg"
+  
+  return(res)
+}
 
 computeIonCoverageMap <- function(row){
   bIons <- fromJSON(row[,"bare_b_ions"])

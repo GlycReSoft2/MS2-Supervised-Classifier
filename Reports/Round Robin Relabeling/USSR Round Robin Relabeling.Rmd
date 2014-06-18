@@ -1,0 +1,102 @@
+---
+output:
+  html_document:
+    number_sections: yes
+    theme: journal
+    toc: yes
+---
+```{r include=FALSE}
+require(knitr)
+opts_chunk$set(fig.width = 15)
+suppressPackageStartupMessages(require(ggplot2))
+suppressPackageStartupMessages(require(plyr))
+suppressPackageStartupMessages(require(rpart))
+suppressPackageStartupMessages(require(randomForest))
+suppressPackageStartupMessages(require(data.table))
+suppressPackageStartupMessages(require(lubridate))
+suppressPackageStartupMessages(source("../../Scripts/label-and-disambiguate.R"))
+suppressPackageStartupMessages(source("../../Scripts/run-analysis.R"))
+
+testFormula = complexModelFormula
+#testFormula = call ~ meanCoverage + percentUncovered + numStubs + ppm_error
+mtry = 5
+set.seed(1)
+```
+
+```{r}
+USSRLabel <- prepareAnnotatedModel("../../USSR//20131219_005_results-scored-annotated.fix.csv")
+USSRData <- loadDir("../../USSR/", includeAnno=F)
+SolomonLabel <- prepareAnnotatedModel("../../Solomon Islands//20131222_004_results-scored-annotated.fix.csv")
+SouthCarolinaLabel <- prepareAnnotatedModel("../../South Carolina//20131220_002_results-scored-annotated.fix.csv")
+
+labelForest <- randomForest(testFormula, USSRLabel, mtry=mtry, ntree = 5000, importance = T)
+
+varImpPlot(labelForest)
+
+newLabels <- lapply(USSRData, function(dataSet){
+  dataSet$call <- predict(labelForest, dataSet)
+  fit <- randomForest(testFormula, dataSet, mtry=mtry, ntree = 5000, importance = T)
+  list(check = checkModel(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type="prob")),
+       fNeg = getFalseNegatives(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type="prob")),
+       fPos = getFalsePositives(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type="prob")),
+       tPos = getTruePositives(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type="prob")),
+       tNeg = getTrueNegatives(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type="prob"))
+       )
+  
+})
+```
+
+```{r}
+USSRLabelsOther <- lapply(list(SolomonLabelByUSSR = SolomonLabel, SouthCarolinaLabelByUSSR = SouthCarolinaLabel), function(dataSet){
+  list(check = checkModel(dataSet=dataSet, modelPred=predict(labelForest, dataSet, type="prob")),
+       fNeg = getFalseNegatives(dataSet=dataSet, modelPred=predict(labelForest, dataSet, type="prob")),
+       fPos = getFalsePositives(dataSet=dataSet, modelPred=predict(labelForest, dataSet, type="prob")))  
+})
+
+```
+
+```{r}
+otherLabelsUSSR <- lapply(list(SolomonLabeledUSSR = SolomonLabel, SouthCarolinaLabeledUSSR = SouthCarolinaLabel), function(dataSet){
+  fit <- randomForest(testFormula, dataSet, mtry=mtry, ntree = 5000, importance = T)
+  list(check = checkModel(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type="prob")),
+       fNeg = getFalseNegatives(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type="prob")),
+       fPos = getFalsePositives(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type="prob")))  
+})
+```
+
+```{r}
+errorTableRep <- as.data.frame(do.call(rbind, lapply(newLabels, function(x){unlist(x$check)})))
+
+errorTableUSSRLabelOther <- as.data.frame(do.call(rbind, lapply(USSRLabelsOther, function(x){unlist(x$check)})))
+
+errorTableOtherLabelUSSR <- as.data.frame(do.call(rbind, lapply(otherLabelsUSSR, function(x){unlist(x$check)})))
+
+errorTable <- name_rows(rbind(errorTableRep, errorTableUSSRLabelOther, errorTableOtherLabelUSSR))
+
+errorTable <- arrange(errorTable, TruePositive/.numYes, -ErrorRate)
+
+kable(errorTable)
+ggplot(errorTable, aes(size = TruePositive/.numYes,  y = FalsePositive, x = FalseNegative, color = ErrorRate, label = zapsmall(TruePositive/.numYes, 3))) + geom_point() + scale_size(range = c(4,10))
+
+ggplot(errorTable, aes(y = TruePositive/(TruePositive + FalseNegative), x = FalsePositive/(FalsePositive + TrueNegative), size = ErrorRate, color =  .rownames)) + geom_point() + scale_size(range = c(4,10))
+```
+
+```{r fig.width=12, fig.height=12}
+falseNegatives <- lapply(newLabels, function(x){
+  kable(x[["fNeg"]][,c('Glycopeptide_identifier', "ppm_error", 'peptideLens',"meanCoverage", "percentUncovered", "numStubs", 'fNeg')])
+})
+
+falsePositives <- lapply(newLabels, function(x){
+  kable(x[["fPos"]][,c('Glycopeptide_identifier', "ppm_error",'peptideLens',"meanCoverage", "percentUncovered", "numStubs", 'fPos')])
+})
+
+truePositives<-lapply(newLabels, function(x){
+  kable(x[["tPos"]][,c('Glycopeptide_identifier', "ppm_error", 'peptideLens',"meanCoverage", "percentUncovered", "numStubs", 'tPos')])
+  })
+
+trueNegatives<-lapply(newLabels, function(x){
+  kable(x[["tNeg"]][,c('Glycopeptide_identifier', "ppm_error", 'peptideLens',"meanCoverage", "percentUncovered", "numStubs", 'tNeg')])
+  })
+
+```
+

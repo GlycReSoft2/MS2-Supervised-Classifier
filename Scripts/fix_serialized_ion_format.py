@@ -1,5 +1,6 @@
 import ast
 import csv
+import glob
 import json
 import os
 import sys
@@ -26,5 +27,6 @@ def main(infile, outfile = None):
 
 if __name__ == '__main__':
 	for f in sys.argv[1:]:
-		main(f)
+		for g in glob.glob(f):
+			main(g)
 

@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title></title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: rgb(88, 72, 246)
+   }
+
+   pre .number {
+     color: rgb(0, 0, 205);
+   }
+
+   pre .comment {
+     color: rgb(76, 136, 107);
+   }
+
+   pre .keyword {
+     color: rgb(0, 0, 255);
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: rgb(3, 106, 7);
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</head>
+
+<body>
+<pre><code class="r">USSRLabel &lt;- prepareAnnotatedModel(&quot;../USSR//20131219_005_results-scored-annotated.fix.csv&quot;)
+USSRData &lt;- loadDir(&quot;../USSR/&quot;, includeAnno=F)
+SolomonLabel &lt;- prepareAnnotatedModel(&quot;../Solomon Islands//20131222_004_results-scored-annotated.fix.csv&quot;)
+SouthCarolinaLabel &lt;- prepareAnnotatedModel(&quot;../South Carolina//20131220_002_results-scored-annotated.fix.csv&quot;)
+
+labelForest &lt;- randomForest(testFormula, USSRLabel, mtry=mtry, ntree = 5000, importance = T)
+
+varImpPlot(labelForest)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-2"/> </p>
+
+<pre><code class="r">newLabels &lt;- lapply(USSRData, function(dataSet){
+  dataSet$call &lt;- predict(labelForest, dataSet)
+  fit &lt;- randomForest(testFormula, dataSet, mtry=mtry, ntree = 5000, importance = T)
+  list(check = checkModel(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type=&quot;prob&quot;)),
+       fNeg = getFalseNegatives(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type=&quot;prob&quot;)),
+       fPos = getFalsePositives(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type=&quot;prob&quot;)),
+       tPos = getTruePositives(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type=&quot;prob&quot;)),
+       tNeg = getTrueNegatives(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type=&quot;prob&quot;))
+       )
+
+})
+</code></pre>
+
+<pre><code class="r">USSRLabelsOther &lt;- lapply(list(SolomonLabelByUSSR = SolomonLabel, SouthCarolinaLabelByUSSR = SouthCarolinaLabel), function(dataSet){
+  list(check = checkModel(dataSet=dataSet, modelPred=predict(labelForest, dataSet, type=&quot;prob&quot;)),
+       fNeg = getFalseNegatives(dataSet=dataSet, modelPred=predict(labelForest, dataSet, type=&quot;prob&quot;)),
+       fPos = getFalsePositives(dataSet=dataSet, modelPred=predict(labelForest, dataSet, type=&quot;prob&quot;)))  
+})
+</code></pre>
+
+<pre><code class="r">otherLabelsUSSR &lt;- lapply(list(SolomonLabeledUSSR = SolomonLabel, SouthCarolinaLabeledUSSR = SouthCarolinaLabel), function(dataSet){
+  fit &lt;- randomForest(testFormula, dataSet, mtry=mtry, ntree = 5000, importance = T)
+  list(check = checkModel(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type=&quot;prob&quot;)),
+       fNeg = getFalseNegatives(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type=&quot;prob&quot;)),
+       fPos = getFalsePositives(dataSet=USSRLabel, modelPred=predict(fit, USSRLabel, type=&quot;prob&quot;)))  
+})
+</code></pre>
+
+<pre><code class="r">errorTableRep &lt;- as.data.frame(do.call(rbind, lapply(newLabels, function(x){unlist(x$check)})))
+
+errorTableUSSRLabelOther &lt;- as.data.frame(do.call(rbind, lapply(USSRLabelsOther, function(x){unlist(x$check)})))
+
+errorTableOtherLabelUSSR &lt;- as.data.frame(do.call(rbind, lapply(otherLabelsUSSR, function(x){unlist(x$check)})))
+
+errorTable &lt;- name_rows(rbind(errorTableRep, errorTableUSSRLabelOther, errorTableOtherLabelUSSR))
+
+errorTable &lt;- arrange(errorTable, TruePositive/.numYes, -ErrorRate)
+
+kable(errorTable)
+</code></pre>
+
+<pre><code>## 
+## 
+## | TruePositive| FalsePositive| FalseNegative| TrueNegative|    FPR|   FDR| ErrorRate| .numYes| .numNo|.rownames                           |
+## |------------:|-------------:|-------------:|------------:|------:|-----:|---------:|-------:|------:|:-----------------------------------|
+## |          215|            28|            28|          574| 0.0465| 2e-04|    0.0663|     243|    602|SouthCarolinaLabeledUSSR            |
+## |           60|            31|             5|         1002| 0.0300| 5e-04|    0.0328|      65|   1033|SouthCarolinaLabelByUSSR            |
+## |          114|             4|             6|          577| 0.0069| 1e-04|    0.0143|     120|    581|SolomonLabelByUSSR                  |
+## |          231|            45|            12|          557| 0.0748| 3e-04|    0.0675|     243|    602|SolomonLabeledUSSR                  |
+## |          234|             4|             9|          598| 0.0066| 0e+00|    0.0154|     243|    602|20131220_006_results-scored.fix.csv |
+## |          236|            14|             7|          588| 0.0233| 1e-04|    0.0249|     243|    602|20131219_006_results-scored.fix.csv |
+## |          243|             0|             0|          602| 0.0000| 0e+00|    0.0000|     243|    602|20131219_005_results-scored.fix.csv |
+</code></pre>
+
+<pre><code class="r">ggplot(errorTable, aes(size = TruePositive/.numYes,  y = FalsePositive, x = FalseNegative, color = ErrorRate, label = zapsmall(TruePositive/.numYes, 3))) + geom_point() + scale_size(range = c(4,10))
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-5"/> </p>
+
+<pre><code class="r">ggplot(errorTable, aes(y = TruePositive/(TruePositive + FalseNegative), x = FalsePositive/(FalsePositive + TrueNegative), size = ErrorRate, color =  .rownames)) + geom_point() + scale_size(range = c(4,10))
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-5"/> </p>
+
+<pre><code class="r">falseNegatives &lt;- lapply(newLabels, function(x){
+  kable(x[[&quot;fNeg&quot;]][,c(&#39;Glycopeptide_identifier&#39;, &quot;ppm_error&quot;, &#39;peptideLens&#39;,&quot;meanCoverage&quot;, &quot;percentUncovered&quot;, &quot;numStubs&quot;, &#39;fNeg&#39;)])
+})
+</code></pre>
+
+<pre><code>## Warning: no non-missing arguments to max; returning -Inf
+## Warning: no non-missing arguments to max; returning -Inf
+## Warning: no non-missing arguments to max; returning -Inf
+## Warning: no non-missing arguments to max; returning -Inf
+## Warning: no non-missing arguments to max; returning -Inf
+## Warning: no non-missing arguments to max; returning -Inf
+## Warning: no non-missing arguments to max; returning -Inf
+</code></pre>
+
+<pre><code>## 
+## 
+## |Glycopeptide_identifier | ppm_error| peptideLens| meanCoverage| percentUncovered| numStubs| fNeg|
+## |:-----------------------|---------:|-----------:|------------:|----------------:|--------:|----:|
+## 
+## 
+## |    |Glycopeptide_identifier                                                                      | ppm_error| peptideLens| meanCoverage| percentUncovered| numStubs|   fNeg|
+## |:---|:--------------------------------------------------------------------------------------------|---------:|-----------:|------------:|----------------:|--------:|------:|
+## |143 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[0;5;4;1;0]                                      |    -2.598|          19|        3.947|           0.1053|        0| 0.3704|
+## |150 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;4;4;1;0]                                      |    -3.296|          19|        4.895|           0.0000|        1| 0.3564|
+## |163 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[0;6;6;0;0]                                      |     1.653|          19|        3.105|           0.1053|        1| 0.1718|
+## |176 |N(HexNAc)GSYPN(Deamidated)LSK[0;6;6;1;0]                                                     |     9.431|           9|        1.778|           0.0000|        1| 0.0584|
+## |187 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;4;5;0;0]                                      |    -5.907|          19|        4.316|           0.0000|        1| 0.0128|
+## |213 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQN(Deamidated)IHPVTIGEC(Carbamidomethyl)PK[1;6;5;3;0] |     5.575|          27|        3.074|           0.1481|        0| 0.1160|
+## |282 |N(Deamidated)GSYPN(HexNAc)LSK[2;6;5;0;0]                                                     |    -2.425|           9|        2.000|           0.1111|        1| 0.1790|
+## 
+## 
+## |    |Glycopeptide_identifier                                                                      | ppm_error| peptideLens| meanCoverage| percentUncovered| numStubs|   fNeg|
+## |:---|:--------------------------------------------------------------------------------------------|---------:|-----------:|------------:|----------------:|--------:|------:|
+## |110 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[3;7;6;1;0]                           |    -8.104|          22|        6.682|           0.0000|        1| 0.3332|
+## |143 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[0;5;4;1;0]                                      |    -2.598|          19|        3.947|           0.1053|        0| 0.3574|
+## |148 |N(Deamidated)GSYPN(HexNAc)LSK[0;4;5;1;0]                                                     |     8.121|           9|        3.889|           0.1111|        0| 0.4898|
+## |150 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;4;4;1;0]                                      |    -3.296|          19|        4.895|           0.0000|        1| 0.4778|
+## |163 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[0;6;6;0;0]                                      |     1.653|          19|        3.105|           0.1053|        1| 0.3446|
+## |176 |N(HexNAc)GSYPN(Deamidated)LSK[0;6;6;1;0]                                                     |     9.431|           9|        1.778|           0.0000|        1| 0.1256|
+## |187 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;4;5;0;0]                                      |    -5.907|          19|        4.316|           0.0000|        1| 0.0446|
+## |213 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQN(Deamidated)IHPVTIGEC(Carbamidomethyl)PK[1;6;5;3;0] |     5.575|          27|        3.074|           0.1481|        0| 0.2684|
+## |282 |N(Deamidated)GSYPN(HexNAc)LSK[2;6;5;0;0]                                                     |    -2.425|           9|        2.000|           0.1111|        1| 0.0520|
+</code></pre>
+
+<pre><code class="r">falsePositives &lt;- lapply(newLabels, function(x){
+  kable(x[[&quot;fPos&quot;]][,c(&#39;Glycopeptide_identifier&#39;, &quot;ppm_error&quot;,&#39;peptideLens&#39;,&quot;meanCoverage&quot;, &quot;percentUncovered&quot;, &quot;numStubs&quot;, &#39;fPos&#39;)])
+})
+</code></pre>
+
+<pre><code>## Warning: no non-missing arguments to max; returning -Inf
+## Warning: no non-missing arguments to max; returning -Inf
+## Warning: no non-missing arguments to max; returning -Inf
+## Warning: no non-missing arguments to max; returning -Inf
+## Warning: no non-missing arguments to max; returning -Inf
+## Warning: no non-missing arguments to max; returning -Inf
+## Warning: no non-missing arguments to max; returning -Inf
+</code></pre>
+
+<pre><code>## 
+## 
+## |Glycopeptide_identifier | ppm_error| peptideLens| meanCoverage| percentUncovered| numStubs| fPos|
+## |:-----------------------|---------:|-----------:|------------:|----------------:|--------:|----:|
+## 
+## 
+## |    |Glycopeptide_identifier                                                        | ppm_error| peptideLens| meanCoverage| percentUncovered| numStubs|   fPos|
+## |:---|:------------------------------------------------------------------------------|---------:|-----------:|------------:|----------------:|--------:|------:|
+## |175 |N(Deamidated)LLWLTEKNGSYPN(HexNAc)LSKSYVN(Deamidated)N(Deamidated)K[1;7;6;4;0] |    -3.710|          23|        6.957|           0.0000|        0| 0.9552|
+## |194 |N(Deamidated)LLWLTEKN(HexNAc)GSYPN(Deamidated)LSKSYVN(Deamidated)NK[1;5;4;2;0] |    -3.987|          23|        5.304|           0.0000|        0| 0.7548|
+## |195 |N(Deamidated)LLWLTEKN(HexNAc)GSYPN(Deamidated)LSKSYVNN(Deamidated)K[1;5;4;2;0] |    -3.987|          23|        5.304|           0.0000|        0| 0.7548|
+## |196 |N(Deamidated)LLWLTEKN(Deamidated)GSYPN(HexNAc)LSKSYVN(Deamidated)NK[1;5;4;2;0] |    -3.987|          23|        5.783|           0.0000|        0| 0.8544|
+## |197 |N(Deamidated)LLWLTEKN(Deamidated)GSYPN(HexNAc)LSKSYVNN(Deamidated)K[1;5;4;2;0] |    -3.987|          23|        5.783|           0.0000|        0| 0.8544|
+## |198 |NLLWLTEKN(HexNAc)GSYPN(Deamidated)LSKSYVN(Deamidated)N(Deamidated)K[1;7;6;4;0] |    -3.710|          23|        6.217|           0.0000|        0| 0.9696|
+## |199 |N(Deamidated)LLWLTEKN(HexNAc)GSYPN(Deamidated)LSKSYVNN(Deamidated)K[1;7;6;4;0] |    -3.710|          23|        6.696|           0.0000|        0| 0.9504|
+## |210 |NLLWLTEKN(HexNAc)GSYPN(Deamidated)LSKSYVN(Deamidated)N(Deamidated)K[1;5;4;2;0] |    -3.987|          23|        5.000|           0.0000|        0| 0.6472|
+## |218 |N(Deamidated)LLWLTEKN(HexNAc)GSYPN(Deamidated)LSKSYVN(Deamidated)NK[1;7;6;4;0] |    -3.710|          23|        5.783|           0.0000|        0| 0.8532|
+## |249 |N(Deamidated)LLWLTEKN(Deamidated)GSYPN(HexNAc)LSKSYVNN(Deamidated)K[1;7;6;4;0] |    -3.710|          23|        5.087|           0.0000|        0| 0.7796|
+## |252 |N(Deamidated)LLWLTEKN(HexNAc)GSYPN(HexNAc)LSKSYVNNK[1;8;6;0;0]                 |    -7.327|          23|        5.913|           0.0000|        1| 0.6518|
+## |295 |N(HexNAc)GSYPN(HexNAc)LSKSYVN(Deamidated)NK[2;11;7;0;0]                        |     9.544|          15|        2.133|           0.2000|        2| 0.7496|
+## |296 |N(HexNAc)GSYPN(HexNAc)LSKSYVNN(Deamidated)K[2;11;7;0;0]                        |     9.544|          15|        2.133|           0.2000|        2| 0.7496|
+## |314 |N(HexNAc)GSYPN(HexNAc)LSK[3;14;13;0;0]                                         |     7.494|           9|        1.222|           0.5556|        2| 0.9880|
+## 
+## 
+## |    |Glycopeptide_identifier                                                        | ppm_error| peptideLens| meanCoverage| percentUncovered| numStubs|   fPos|
+## |:---|:------------------------------------------------------------------------------|---------:|-----------:|------------:|----------------:|--------:|------:|
+## |175 |N(Deamidated)LLWLTEKNGSYPN(HexNAc)LSKSYVN(Deamidated)N(Deamidated)K[1;7;6;4;0] |    -3.710|          23|        6.957|           0.0000|        0| 0.6490|
+## |295 |N(HexNAc)GSYPN(HexNAc)LSKSYVN(Deamidated)NK[2;11;7;0;0]                        |     9.544|          15|        2.133|           0.2000|        2| 0.8664|
+## |296 |N(HexNAc)GSYPN(HexNAc)LSKSYVNN(Deamidated)K[2;11;7;0;0]                        |     9.544|          15|        2.133|           0.2000|        2| 0.8664|
+## |314 |N(HexNAc)GSYPN(HexNAc)LSK[3;14;13;0;0]                                         |     7.494|           9|        1.222|           0.5556|        2| 0.9888|
+</code></pre>
+
+<pre><code class="r">truePositives&lt;-lapply(newLabels, function(x){
+  kable(x[[&quot;tPos&quot;]][,c(&#39;Glycopeptide_identifier&#39;, &quot;ppm_error&quot;, &#39;peptideLens&#39;,&quot;meanCoverage&quot;, &quot;percentUncovered&quot;, &quot;numStubs&quot;, &#39;tPos&#39;)])
+  })
+</code></pre>
+
+<pre><code>## 
+## 
+## |    |Glycopeptide_identifier                                                                      | ppm_error| peptideLens| meanCoverage| percentUncovered| numStubs|   tPos|
+## |:---|:--------------------------------------------------------------------------------------------|---------:|-----------:|------------:|----------------:|--------:|------:|
+## |1   |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;6;5;1;0]                                            |   -5.9097|          18|      22.5556|           0.0000|      8.0| 1.0000|
+## |2   |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;6;5;2;0]                                   |    1.3485|          22|      26.5909|           0.0000|      8.0| 1.0000|
+## |3   |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;6;5;2;0]                                   |    1.3485|          22|      26.0455|           0.0000|      8.0| 1.0000|
+## |4   |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;7;6;1;0]                                            |   -3.9412|          18|      20.2222|           0.0000|      9.0| 1.0000|
+## |5   |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;5;4;2;0]                                            |   -6.5906|          18|      18.0000|           0.0000|      7.0| 1.0000|
+## |6   |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;7;6;3;0]                                            |   -8.5683|          18|      21.6667|           0.0000|      8.0| 0.9996|
+## |7   |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;6;5;3;0]                                            |   -6.7784|          18|      18.5000|           0.0000|      6.0| 1.0000|
+## |8   |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;7;6;2;0]                                   |    2.8744|          22|      25.0455|           0.0000|      9.0| 1.0000|
+## |9   |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;7;6;2;0]                                   |    2.8744|          22|      24.5000|           0.0000|      9.0| 1.0000|
+## |10  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[1;7;6;1;0]                           |    2.9786|          22|      22.5000|           0.0000|      9.0| 1.0000|
+## |11  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;4;1;0]                                      |   -3.9610|          19|      22.8947|           0.0000|      6.0| 1.0000|
+## |12  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;6;5;0;0]                                   |   -2.7807|          22|      20.6364|           0.0000|      8.0| 1.0000|
+## |13  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;4;1;0]                                   |   -4.9353|          22|      17.5909|           0.0000|      7.0| 1.0000|
+## |14  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;4;1;0]                                   |   -4.9353|          22|      17.5909|           0.0000|      7.0| 1.0000|
+## |15  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;7;6;1;0]                                      |   -0.8840|          19|      22.7895|           0.0000|      9.0| 1.0000|
+## |16  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[0;14;4;0;0]                          |    9.6761|          22|      29.1364|           0.0000|      7.0| 0.9884|
+## |17  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;5;0;0]                                      |   -2.7961|          19|      20.9474|           0.0000|      5.0| 1.0000|
+## |18  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;6;5;0;0]                                   |   -2.7807|          22|      20.0909|           0.0000|      8.0| 1.0000|
+## |19  |NGSYPN(HexNAc)LSK[1;5;4;2;0]                                                                 |    0.1308|           9|       9.8889|           0.0000|     10.0| 1.0000|
+## |20  |N(HexNAc)GSYPNLSK[1;5;4;2;0]                                                                 |    0.1308|           9|       9.0000|           0.0000|     10.0| 1.0000|
+## |21  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;7;6;3;0]                                      |   -2.8410|          19|      21.0526|           0.0000|      8.0| 1.0000|
+## |22  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;6;5;1;0]                                   |   -0.1015|          22|      22.5000|           0.0000|      7.0| 1.0000|
+## |23  |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[1;7;6;1;0]             |   -4.3482|          27|      21.9630|           0.0000|      6.0| 0.9988|
+## |24  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;6;5;2;0]                             |   -1.5373|          28|      22.3929|           0.0000|      1.0| 0.9976|
+## |25  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;6;5;1;0]                                   |   -0.1015|          22|      21.9545|           0.0000|      7.0| 1.0000|
+## |26  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;5;1;0]                                      |   -3.5609|          19|      18.5789|           0.0000|      8.0| 1.0000|
+## |27  |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[1;5;4;2;0]             |   -0.1807|          27|      22.2222|           0.0000|      5.0| 0.9996|
+## |28  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;5;2;0]                                      |    0.7980|          19|      18.5789|           0.0000|      5.0| 1.0000|
+## |29  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;7;6;3;0]                             |   -0.4458|          28|      22.9643|           0.0000|      2.0| 0.9950|
+## |30  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;6;5;3;0]                             |    0.4326|          28|      22.5000|           0.0000|      1.0| 0.9970|
+## |31  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;6;5;0;0]                                            |   -3.0106|          18|      16.5556|           0.0000|      6.0| 1.0000|
+## |32  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;6;0;0]                                   |   -3.5683|          22|      19.4091|           0.0000|      6.0| 1.0000|
+## |33  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;6;0;0]                                   |   -3.5683|          22|      19.4091|           0.0000|      6.0| 1.0000|
+## |34  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;7;6;2;0]                                      |   -0.0219|          19|      19.6842|           0.0000|      8.0| 0.9996|
+## |35  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;7;6;2;0]                             |   -2.8434|          28|      20.0000|           0.0000|      2.0| 0.9932|
+## |36  |N(HexNAc)VTVTHSVNLLEDSHNGK[1;5;4;1;0]                                                        |   -7.4680|          18|      12.3889|           0.0000|      4.0| 0.9804|
+## |37  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;6;2;0]                                      |    0.7444|          19|      18.9474|           0.0000|      5.0| 1.0000|
+## |38  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;4;2;0]                                      |   -1.2420|          19|      17.6842|           0.0000|      5.0| 1.0000|
+## |39  |DTIC(Carbamidomethyl)IGYHAN(Deamidated)N(HexNAc)STDTVDTVLEK[1;7;6;3;0]                       |   -1.5816|          22|      15.9545|           0.0000|      6.0| 1.0000|
+## |40  |DTIC(Carbamidomethyl)IGYHAN(Deamidated)N(HexNAc)STDTVDTVLEK[1;7;6;2;0]                       |   -1.5416|          22|      17.0000|           0.0000|      6.0| 1.0000|
+## |41  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(Deamidated)STDTVDTVLEK[1;7;6;3;0]                       |   -1.5816|          22|      15.5000|           0.0000|      6.0| 1.0000|
+## |42  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[2;7;6;2;0]                                      |    5.9064|          19|      15.6842|           0.0000|      5.0| 1.0000|
+## |43  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;5;4;2;0]                             |   -0.7608|          28|      19.1429|           0.0000|      2.0| 0.9950|
+## |44  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;7;6;0;0]                                            |   -2.7114|          18|      14.1111|           0.0000|      6.0| 1.0000|
+## |45  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;7;6;4;0]                                      |   -3.7451|          19|      17.9474|           0.0000|      6.0| 1.0000|
+## |46  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(Deamidated)STDTVDTVLEK[1;7;6;2;0]                       |   -1.5416|          22|      15.9091|           0.0000|      6.0| 1.0000|
+## |47  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;5;3;0]                                      |   -2.2429|          19|      17.1053|           0.0000|      8.0| 1.0000|
+## |48  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;4;2;0]                                   |   -4.0561|          22|      14.7727|           0.0000|      6.0| 1.0000|
+## |49  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;4;2;0]                                   |   -4.0561|          22|      14.7727|           0.0000|      6.0| 1.0000|
+## |50  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;5;5;1;0]                                            |   -8.2882|          18|      14.7222|           0.0000|      5.0| 0.9994|
+## |51  |NGSYPN(HexNAc)LSK[1;4;5;1;0]                                                                 |   -1.4933|           9|       8.3333|           0.0000|     10.0| 1.0000|
+## |52  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;5;2;0]                                      |   -0.5044|          19|      15.4737|           0.0000|      4.0| 1.0000|
+## |53  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;5;6;1;0]                                            |   -7.0563|          18|      12.6667|           0.0000|      8.0| 0.9988|
+## |54  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;5;4;1;0]                             |   -4.1984|          28|      18.5714|           0.0000|      2.0| 0.9948|
+## |55  |NGSYPN(HexNAc)LSK[1;6;5;0;0]                                                                 |   -2.2131|           9|       7.2222|           0.0000|      9.0| 1.0000|
+## |56  |HN(HexNAc)VTR[1;5;4;1;0]                                                                     |   -1.3984|           5|       2.8000|           0.0000|      3.0| 0.9934|
+## |57  |N(HexNAc)GSYPNLSK[1;4;5;1;0]                                                                 |   -1.4933|           9|       6.8889|           0.0000|     10.0| 1.0000|
+## |58  |N(HexNAc)GSYPNLSK[1;6;5;0;0]                                                                 |   -2.2131|           9|       7.2222|           0.0000|      9.0| 1.0000|
+## |59  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[0;8;2;0;0]                                            |   -2.2699|          18|      14.2222|           0.0000|      2.0| 0.9940|
+## |60  |N(HexNAc)GSYPN(HexNAc)LSK[2;6;6;0;0]                                                         |   -1.0568|           9|       9.6667|           0.0000|      9.0| 1.0000|
+## |61  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;6;6;1;0]                                            |   -4.3064|          18|      15.0556|           0.0000|      5.0| 1.0000|
+## |62  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;7;6;3;0]                                   |   -5.7919|          22|      14.2273|           0.0000|      7.0| 1.0000|
+## |63  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;6;1;0]                                   |    3.6927|          22|      15.3182|           0.0000|      7.0| 1.0000|
+## |64  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;6;1;0]                                   |    3.6927|          22|      15.3182|           0.0000|      7.0| 1.0000|
+## |65  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;6;1;0]                                      |   -2.0419|          19|      13.8947|           0.0000|      3.0| 1.0000|
+## |66  |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[1;6;5;2;0]             |   -3.7703|          27|      14.1852|           0.0000|      3.0| 0.9780|
+## |67  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[2;7;6;3;0]                                      |    2.5239|          19|      11.0000|           0.0000|      7.0| 1.0000|
+## |68  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;7;6;0;0]                                      |    0.4413|          19|      15.4211|           0.0000|      4.0| 1.0000|
+## |69  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;7;6;3;0]                                   |   -5.7919|          22|      13.6818|           0.0000|      7.0| 1.0000|
+## |70  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;5;0;0]                                   |   -9.2195|          22|      13.2727|           0.0000|      3.0| 0.9918|
+## |71  |NGSYPN(HexNAc)LSK[1;5;4;1;0]                                                                 |   -1.8672|           9|       7.8889|           0.0000|      9.0| 1.0000|
+## |72  |N(HexNAc)GSYPNLSK[1;5;4;1;0]                                                                 |   -1.8672|           9|       5.7778|           0.0000|      9.0| 0.9996|
+## |73  |N(HexNAc)GSYPNLSK[1;6;5;1;0]                                                                 |   -1.5766|           9|       6.4444|           0.0000|     10.0| 0.9998|
+## |74  |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;6;5;1;0]                                            |   -5.9097|          18|      14.1111|           0.0000|      8.0| 1.0000|
+## |75  |N(HexNAc)GSYPN(HexNAc)LSK[1;7;6;1;0]                                                         |   -0.9177|           9|       6.3333|           0.0000|      8.0| 0.9998|
+## |76  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[1;6;6;0;0]                           |    0.1096|          22|      13.4545|           0.0000|      8.0| 1.0000|
+## |77  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;6;6;0;0]                                            |   -3.3875|          18|      15.5000|           0.0000|      4.0| 1.0000|
+## |78  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;6;5;1;0]                             |   -5.4029|          28|      15.2500|           0.0000|      1.0| 0.9802|
+## |79  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;5;0;0]                                   |   -9.2195|          22|      12.7273|           0.0000|      3.0| 0.9908|
+## |80  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;5;5;0;0]                                            |   -4.4787|          18|      11.5000|           0.0000|      2.0| 0.9994|
+## |81  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;4;5;1;0]                                      |   -4.0059|          19|      11.0000|           0.0000|      4.0| 1.0000|
+## |82  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;6;0;0]                                      |   -0.4635|          19|      12.6842|           0.0000|      3.0| 1.0000|
+## |83  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[1;7;6;0;0]                           |   -0.8716|          22|      12.5000|           0.0000|      8.0| 1.0000|
+## |84  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;5;6;0;0]                                            |   -2.7455|          18|      13.2778|           0.0000|      6.0| 1.0000|
+## |85  |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;7;6;1;0]                                            |   -3.9412|          18|      14.5556|           0.0000|      9.0| 1.0000|
+## |86  |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;5;4;2;0]                                            |   -6.5906|          18|      12.8333|           0.0000|      7.0| 1.0000|
+## |87  |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;6;5;3;0]                                            |   -6.7784|          18|      14.5000|           0.0000|      6.0| 1.0000|
+## |88  |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;7;6;3;0]                                            |   -8.5683|          18|      14.2778|           0.0000|      8.0| 0.9996|
+## |89  |N(HexNAc)VTVTHSVNLLEDSHNGK[1;6;5;1;0]                                                        |   -6.4433|          18|       9.7778|           0.0000|      5.0| 1.0000|
+## |90  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[2;7;6;1;0]                                      |    0.2467|          19|      10.6316|           0.0000|      6.0| 1.0000|
+## |91  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;5;1;0]                                      |   -3.4625|          19|      10.2632|           0.0000|      3.0| 1.0000|
+## |92  |NGSYPN(HexNAc)LSK[2;4;5;0;0]                                                                 |   -4.2508|           9|       6.1111|           0.0000|      7.0| 0.9998|
+## |93  |N(HexNAc)GSYPNLSK[2;4;5;0;0]                                                                 |   -4.2508|           9|       5.4444|           0.0000|      7.0| 1.0000|
+## |94  |NGSYPN(HexNAc)LSK[1;6;5;1;0]                                                                 |   -1.5766|           9|       6.2222|           0.0000|     10.0| 0.9998|
+## |95  |SWSYIAETPN(Deamidated)SEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;7;6;3;0]                 |   -0.0952|          28|      13.0000|           0.0000|      1.0| 0.9894|
+## |96  |N(HexNAc)VTVTHSVNLLEDSHNGK[1;7;6;0;0]                                                        |   -4.0895|          18|      10.4444|           0.0000|      5.0| 1.0000|
+## |97  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;6;0;0]                                      |   -3.0749|          19|      11.8947|           0.0000|      3.0| 1.0000|
+## |98  |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;6;5;0;0]                                            |   -3.0106|          18|      12.0000|           0.0000|      6.0| 1.0000|
+## |99  |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[1;7;6;3;0]             |    6.3070|          27|      10.2222|           0.0000|      2.0| 0.9320|
+## |100 |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;5;4;0;0]                                            |   -4.7866|          18|      10.0000|           0.0000|      2.0| 0.9996|
+## |101 |NGSYPN(HexNAc)LSK[2;5;4;0;0]                                                                 |   -1.3818|           9|       6.7778|           0.0000|      6.0| 1.0000|
+## |102 |NGSYPN(HexNAc)LSK[1;6;5;2;0]                                                                 |   -1.0611|           9|       6.1111|           0.0000|      9.0| 0.9998|
+## |103 |N(HexNAc)GSYPNLSK[1;6;5;2;0]                                                                 |   -1.0611|           9|       5.2222|           0.0000|      9.0| 1.0000|
+## |104 |N(HexNAc)GSYPNLSK[2;5;4;0;0]                                                                 |   -1.3818|           9|       5.3333|           0.0000|      6.0| 1.0000|
+## |105 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[0;5;5;2;0]             |    4.7947|          27|      16.3333|           0.0000|      0.0| 0.9964|
+## |106 |N(HexNAc)GSYPNLSK[1;4;4;1;0]                                                                 |   -1.0866|           9|       4.1111|           0.0000|      8.0| 0.9984|
+## |107 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;4;0;0]                                      |   -6.0673|          19|       7.6316|           0.0000|      2.0| 0.9990|
+## |108 |N(Deamidated)GSYPN(HexNAc)LSK[0;6;6;1;0]                                                     |    9.4307|           9|       5.5556|           0.0000|      1.0| 0.8534|
+## |109 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[0;6;6;1;0]             |   -6.6991|          27|      11.8148|           0.0000|      1.0| 0.9966|
+## |110 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[3;7;6;1;0]                           |   -8.1037|          22|       6.6818|           0.0000|      1.0| 0.7948|
+## |111 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;6;6;1;0]                                            |   -4.3064|          18|       9.2778|           0.0000|      5.0| 1.0000|
+## |112 |N(HexNAc)VTVTHSVNLLEDSHNGK[1;6;6;0;0]                                                        |   -6.7592|          18|       8.3333|           0.0000|      4.0| 1.0000|
+## |113 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;5;5;1;0]                                            |   -8.2882|          18|       9.6667|           0.0000|      5.0| 0.9992|
+## |114 |SWSYIAETPN(Deamidated)SEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;7;6;2;0]                 |   -1.6746|          28|       8.5000|           0.0000|      1.0| 0.9910|
+## |115 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;6;2;0]                                      |    1.0948|          19|       7.0526|           0.0000|      2.0| 0.9968|
+## |116 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;5;6;1;0]                                            |   -7.0563|          18|      10.3333|           0.0000|      8.0| 0.9988|
+## |117 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;5;1;0]                                   |   -1.6205|          22|       6.8182|           0.0000|      6.0| 1.0000|
+## |118 |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;5;1;0]                                   |   -1.6205|          22|       6.8182|           0.0000|      6.0| 1.0000|
+## |119 |NGSYPN(HexNAc)LSK[1;5;4;0;0]                                                                 |   -1.8675|           9|       5.1111|           0.0000|      8.0| 1.0000|
+## |120 |N(HexNAc)GSYPNLSK[1;5;4;0;0]                                                                 |   -1.8675|           9|       5.1111|           0.0000|      8.0| 1.0000|
+## |121 |N(HexNAc)VTVTHSVNLLEDSHNGK[1;6;5;0;0]                                                        |   -4.6859|          18|       8.1667|           0.0000|      5.0| 1.0000|
+## |122 |N(HexNAc)GSYPN(HexNAc)LSK[2;9;6;0;0]                                                         |   -3.5034|           9|       5.3333|           0.0000|      8.0| 1.0000|
+## |123 |N(Deamidated)GSYPN(HexNAc)LSK[1;5;4;1;0]                                                     |   -1.3280|           9|       5.5556|           0.0000|      6.0| 1.0000|
+## |124 |NGSYPN(HexNAc)LSK[0;5;4;2;0]                                                                 |   -0.0550|           9|       4.8889|           0.0000|      6.0| 1.0000|
+## |125 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(Deamidated)STDTVDTVLEK[1;5;4;2;0]                       |   -9.7324|          22|       7.6364|           0.0000|      3.0| 0.9662|
+## |126 |DTIC(Carbamidomethyl)IGYHAN(Deamidated)N(HexNAc)STDTVDTVLEK[1;5;4;2;0]                       |   -9.7324|          22|       7.5455|           0.0000|      3.0| 0.9654|
+## |127 |N(HexNAc)GSYPNLSK[1;5;6;1;0]                                                                 |   -2.0741|           9|       3.5556|           0.0000|      6.0| 1.0000|
+## |128 |NGSYPN(HexNAc)LSK[1;5;6;1;0]                                                                 |   -2.0741|           9|       3.5556|           0.0000|      6.0| 1.0000|
+## |129 |NGSYPN(HexNAc)LSK[1;4;4;1;0]                                                                 |   -1.0866|           9|       3.8889|           0.0000|      8.0| 1.0000|
+## |130 |N(HexNAc)GSYPNLSK[1;7;6;2;0]                                                                 |   -1.5617|           9|       4.5556|           0.0000|      6.0| 0.9998|
+## |131 |NGSYPN(HexNAc)LSK[1;7;6;2;0]                                                                 |   -1.5617|           9|       4.5556|           0.0000|      6.0| 0.9998|
+## |132 |N(HexNAc)GSYPNLSK[0;5;4;2;0]                                                                 |   -0.0550|           9|       4.0000|           0.0000|      6.0| 0.9998|
+## |133 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[0;8;2;0;0]                                            |   -2.2699|          18|       8.0000|           0.0000|      2.0| 0.9990|
+## |134 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[0;5;5;1;0]             |    0.1401|          27|       9.7778|           0.0000|      0.0| 0.9942|
+## |135 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;7;6;0;0]                                            |   -2.7114|          18|       8.4444|           0.0000|      6.0| 1.0000|
+## |136 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;5;6;0;0]                                            |   -2.7455|          18|       8.8889|           0.0000|      6.0| 1.0000|
+## |137 |N(HexNAc)GSYPN(HexNAc)LSK[2;6;9;0;0]                                                         |   -4.4694|           9|       6.5556|           0.0000|      7.0| 1.0000|
+## |138 |N(HexNAc)VTVTHSVNLLEDSHNGK[1;7;6;3;0]                                                        |   -5.3203|          18|       6.9444|           0.0000|      4.0| 0.9998|
+## |139 |N(HexNAc)GSYPN(HexNAc)LSK[0;14;4;0;0]                                                        |    7.7308|           9|       4.5556|           0.0000|      5.0| 0.9854|
+## |140 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[0;6;6;1;0]                                      |    1.6958|          19|       5.0526|           0.0000|      0.0| 0.8108|
+## |141 |N(HexNAc)GSYPN(HexNAc)LSK[2;6;8;0;0]                                                         |   -3.0549|           9|       3.2222|           0.0000|     10.0| 0.9994|
+## |142 |SWSYIAETPN(Deamidated)SEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[2;7;6;2;0]                 |    1.2589|          28|       5.8571|           0.0000|      0.0| 0.9004|
+## |143 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[0;5;4;1;0]                                      |   -2.5981|          19|       3.9474|           0.1053|      0.0| 0.7054|
+## |144 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;5;5;0;0]                                            |   -4.4787|          18|       7.5000|           0.0000|      2.0| 0.9996|
+## |145 |SWSYIAETPN(Deamidated)SEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;6;5;0;0]                 |    4.3525|          28|       6.5000|           0.0000|      0.0| 0.9420|
+## |146 |SWSYIAETPN(Deamidated)SEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;6;5;3;0]                 |   -3.4230|          28|       5.1786|           0.0000|      0.0| 0.8418|
+## |147 |DTIC(Carbamidomethyl)IGYHAN(Deamidated)N(HexNAc)STDTVDTVLEK[1;6;5;2;0]                       |   -5.5353|          22|       5.2727|           0.0000|      5.0| 0.9998|
+## |148 |N(Deamidated)GSYPN(HexNAc)LSK[0;4;5;1;0]                                                     |    8.1210|           9|       3.8889|           0.1111|      0.0| 0.8118|
+## |149 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;6;1;0]                                      |   -4.0430|          19|       6.8947|           0.0000|      2.0| 0.9996|
+## |150 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;4;4;1;0]                                      |   -3.2963|          19|       4.8947|           0.0000|      1.0| 0.7406|
+## |151 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;6;3;0]                                      |   -0.6209|          19|       5.9474|           0.0000|      3.0| 0.9992|
+## |152 |NGSYPN(HexNAc)LSK[2;3;6;0;0]                                                                 |   -7.2148|           9|       3.3333|           0.1111|      4.0| 0.9974|
+## |153 |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;6;5;0;0]                             |   -3.9020|          28|       7.1786|           0.0000|      0.0| 0.9736|
+## |154 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;5;0;0]                                      |   -4.3502|          19|       5.5789|           0.0000|      2.0| 0.9986|
+## |155 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;5;4;0;0]                                            |   -4.7866|          18|       7.7222|           0.0000|      2.0| 0.9996|
+## |156 |SWSYIAETPN(Deamidated)SEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;5;4;2;0]                 |   -3.9614|          28|       6.3214|           0.0000|      0.0| 0.9454|
+## |157 |NLLWLTEKN(Deamidated)GSYPN(HexNAc)LSKSYVN(Deamidated)N(Deamidated)K[1;7;6;4;0]               |   -3.7097|          23|       8.6957|           0.0000|      0.0| 0.7336|
+## |158 |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;6;6;1;0]                                   |    5.7869|          22|       5.5909|           0.0000|      4.0| 1.0000|
+## |159 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;6;6;1;0]                                   |    5.7869|          22|       5.5909|           0.0000|      4.0| 1.0000|
+## |160 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(Deamidated)STDTVDTVLEK[1;6;5;2;0]                       |   -5.5353|          22|       4.7273|           0.0000|      5.0| 1.0000|
+## |161 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[0;4;5;1;0]             |   -8.0917|          27|       6.0741|           0.0000|      0.0| 0.9320|
+## |162 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;6;6;0;0]                                            |   -3.3875|          18|       9.1111|           0.0000|      4.0| 1.0000|
+## |163 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[0;6;6;0;0]                                      |    1.6531|          19|       3.1053|           0.1053|      1.0| 0.7062|
+## |164 |N(Deamidated)LLWLTEKN(HexNAc)GSYPNLSKSYVN(Deamidated)N(Deamidated)K[1;7;6;4;0]               |   -3.7097|          23|       6.9565|           0.0000|      0.0| 0.6428|
+## |165 |NGSYPN(HexNAc)LSK[1;7;6;3;0]                                                                 |    3.0849|           9|       3.6667|           0.0000|      6.0| 0.9996|
+## |166 |N(HexNAc)GSYPNLSK[1;6;5;3;0]                                                                 |    1.8418|           9|       2.5556|           0.0000|      8.0| 1.0000|
+## |167 |NGSYPN(HexNAc)LSK[1;6;5;3;0]                                                                 |    1.8418|           9|       2.5556|           0.0000|      8.0| 1.0000|
+## |168 |N(HexNAc)GSYPNLSK[1;7;6;3;0]                                                                 |    3.0849|           9|       3.0000|           0.0000|      6.0| 1.0000|
+## |169 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[1;6;6;1;0]             |   -9.7402|          27|       5.0741|           0.0000|      0.0| 0.8824|
+## |170 |N(HexNAc)GSYPN(Deamidated)LSK[1;5;4;1;0]                                                     |   -1.3280|           9|       2.6667|           0.0000|      6.0| 1.0000|
+## |171 |HN(HexNAc)VTR[1;6;6;1;0]                                                                     |    3.5881|           5|       0.8000|           0.4000|      1.8| 0.9984|
+## |172 |N(HexNAc)GSYPN(HexNAc)LSK[2;12;6;0;0]                                                        |    2.9929|           9|       2.6667|           0.0000|      7.0| 0.9994|
+## |173 |HN(HexNAc)VTR[1;6;5;0;0]                                                                     |    0.6254|           5|       1.0000|           0.0000|      2.7| 0.9998|
+## |174 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;4;6;0;0]                                      |   -3.5028|          19|       7.2105|           0.0000|      2.0| 1.0000|
+## |176 |N(HexNAc)GSYPN(Deamidated)LSK[0;6;6;1;0]                                                     |    9.4307|           9|       1.7778|           0.0000|      1.0| 0.6900|
+## |177 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[0;7;6;0;0]                           |   -6.6968|          22|       4.6818|           0.0000|      2.0| 0.9204|
+## |178 |DTIC(Carbamidomethyl)IGYHAN(Deamidated)N(HexNAc)STDTVDTVLEK[1;6;5;1;0]                       |   -2.1214|          22|       4.5909|           0.0000|      4.0| 0.9954|
+## |179 |N(HexNAc)GSYPNLSK[2;3;6;0;0]                                                                 |   -7.2148|           9|       2.4444|           0.2222|      4.0| 0.9972|
+## |180 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;4;6;0;0]                                   |   -5.5389|          22|       3.9545|           0.0000|      5.0| 0.9998|
+## |181 |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;4;6;0;0]                                   |   -5.5389|          22|       3.9545|           0.0000|      5.0| 0.9998|
+## |184 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[0;4;6;1;0]             |   -0.2344|          27|       4.2222|           0.1111|      0.0| 0.8190|
+## |186 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHN(Deamidated)GK[1;7;6;3;0]                                |   -5.4866|          18|       2.5556|           0.0000|      2.0| 0.9176|
+## |187 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;4;5;0;0]                                      |   -5.9074|          19|       4.3158|           0.0000|      1.0| 0.6740|
+## |189 |N(HexNAc)GSYPN(HexNAc)LSK[2;8;6;1;0]                                                         |   -2.9545|           9|       2.4444|           0.1111|      8.0| 0.9996|
+## |190 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;4;0;0]                                   |   -2.2514|          22|       4.0455|           0.0000|      4.0| 0.9998|
+## |191 |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;4;0;0]                                   |   -2.2514|          22|       4.0455|           0.0000|      4.0| 0.9996|
+## |193 |HN(HexNAc)VTR[0;4;2;0;0]                                                                     |   -8.8012|           5|       1.6000|           0.0000|      1.8| 0.8206|
+## |201 |N(Deamidated)GSYPN(HexNAc)LSK[1;7;6;2;0]                                                     |    2.5274|           9|       3.0000|           0.1111|      4.0| 0.9990|
+## |202 |N(HexNAc)GSYPN(HexNAc)LSK[2;6;7;0;0]                                                         |   -0.6787|           9|       2.5556|           0.0000|      5.0| 0.9998|
+## |203 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(Deamidated)STDTVDTVLEK[1;6;5;1;0]                       |   -2.1214|          22|       3.5909|           0.0000|      4.0| 0.9974|
+## |204 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;4;6;1;0]                                   |   -2.7934|          22|       4.2727|           0.0000|      3.0| 0.9996|
+## |205 |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;4;6;1;0]                                   |   -2.7934|          22|       4.2727|           0.0000|      3.0| 0.9992|
+## |206 |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[0;8;7;0;0]                                            |   -4.9256|          18|       5.7778|           0.0000|      3.0| 0.9994|
+## |208 |N(HexNAc)GSYPN(HexNAc)LSKSYVNN(Deamidated)KEK[4;8;11;2;0]                                    |    2.5723|          17|       3.0000|           0.0000|      3.0| 0.9974|
+## |209 |N(HexNAc)GSYPN(HexNAc)LSKSYVN(Deamidated)NKEK[4;8;11;2;0]                                    |    2.5723|          17|       3.0000|           0.0000|      3.0| 0.9992|
+## |212 |N(Deamidated)GSYPN(HexNAc)LSK[1;5;4;2;0]                                                     |    2.8345|           9|       2.1111|           0.1111|      6.0| 0.9998|
+## |213 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQN(Deamidated)IHPVTIGEC(Carbamidomethyl)PK[1;6;5;3;0] |    5.5752|          27|       3.0741|           0.1481|      0.0| 0.6370|
+## |214 |N(HexNAc)GSYPN(HexNAc)LSK[2;7;9;0;0]                                                         |   -0.7798|           9|       2.2222|           0.0000|      5.0| 0.9998|
+## |215 |N(HexNAc)GSYPN(HexNAc)LSKSYVN(Deamidated)N(Deamidated)K[3;8;8;1;0]                           |   -2.2628|          15|       4.7333|           0.0000|      2.0| 0.9838|
+## |216 |N(Deamidated)GSYPN(HexNAc)LSK[1;5;4;0;0]                                                     |   -0.2389|           9|       2.2222|           0.0000|      5.0| 0.9998|
+## |217 |N(HexNAc)GSYPN(HexNAc)LSK[2;7;8;0;0]                                                         |   -1.8379|           9|       3.5556|           0.0000|      8.0| 0.9994|
+## |233 |N(HexNAc)VTVTHSVNLLEDSHNGK[1;7;6;1;0]                                                        |   -6.3796|          18|       2.8333|           0.0000|      3.0| 0.9978|
+## |234 |N(HexNAc)GSYPN(HexNAc)LSK[2;9;6;1;0]                                                         |   -1.2417|           9|       2.0000|           0.0000|      9.0| 0.9964|
+## |245 |N(HexNAc)GSYPN(HexNAc)LSK[2;7;8;1;0]                                                         |    6.9927|           9|       1.7778|           0.3333|      6.0| 0.9990|
+## |248 |N(HexNAc)GSYPN(HexNAc)LSK[2;7;7;1;0]                                                         |   -0.4717|           9|       1.3333|           0.0000|      5.0| 0.9998|
+## |250 |N(HexNAc)GSYPN(HexNAc)LSKSYVN(Deamidated)NK[0;10;10;0;0]                                     |   -4.3522|          15|       3.2000|           0.0000|      3.0| 0.9974|
+## |251 |N(HexNAc)GSYPN(HexNAc)LSKSYVNN(Deamidated)K[0;10;10;0;0]                                     |   -4.3522|          15|       3.2000|           0.0000|      3.0| 0.9974|
+## |253 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[0;8;7;0;0]                                            |   -4.9256|          18|       5.2222|           0.0000|      3.0| 1.0000|
+## |255 |N(Deamidated)GSYPN(HexNAc)LSK[1;6;5;1;0]                                                     |    0.9561|           9|       1.4444|           0.1111|      2.0| 0.9880|
+## |264 |N(HexNAc)GSYPN(HexNAc)LSK[1;6;6;0;0]                                                         |   -1.6219|           9|       2.0000|           0.1111|      5.0| 0.9998|
+## |265 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;4;5;1;0]                                   |   -3.8433|          22|       1.3636|           0.2727|      3.0| 0.9868|
+## |266 |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;4;5;1;0]                                   |   -3.8433|          22|       1.3636|           0.2727|      3.0| 0.9868|
+## |282 |N(Deamidated)GSYPN(HexNAc)LSK[2;6;5;0;0]                                                     |   -2.4248|           9|       2.0000|           0.1111|      1.0| 0.6638|
+## |291 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[1;8;6;0;0]                           |    5.8987|          22|       5.4545|           0.0000|      3.0| 0.9998|
+## |305 |HN(HexNAc)VTR[1;5;4;0;0]                                                                     |   -2.0406|           5|       0.2000|           0.8000|      2.7| 0.9968|
+## |311 |HN(HexNAc)VTR[0;7;2;0;0]                                                                     |   -3.4059|           5|       0.6000|           0.4000|      1.8| 0.9986|
+## |312 |N(HexNAc)GSYPN(HexNAc)LSK[2;6;5;0;0]                                                         |   -2.1511|           9|       0.8889|           0.1111|      5.0| 1.0000|
+## |313 |HN(HexNAc)VTR[1;5;5;0;0]                                                                     |   -3.9621|           5|       0.6000|           0.4000|      2.1| 0.9984|
+## |319 |N(HexNAc)GSYPN(HexNAc)LSK[4;9;11;2;0]                                                        |    7.9440|           9|       0.8889|           0.1111|      3.0| 0.9570|
+## |320 |N(HexNAc)GSYPNLSK[1;5;5;0;0]                                                                 |   -1.6596|           9|       1.2222|           0.3333|      4.0| 1.0000|
+## |321 |NGSYPN(HexNAc)LSK[1;5;5;0;0]                                                                 |   -1.6596|           9|       1.2222|           0.3333|      4.0| 1.0000|
+## |327 |N(HexNAc)GSYPNLSK[1;5;6;2;0]                                                                 |   -1.4113|           9|       0.5556|           0.4444|      3.0| 1.0000|
+## |328 |NGSYPN(HexNAc)LSK[1;5;6;2;0]                                                                 |   -1.4113|           9|       0.5556|           0.4444|      3.0| 1.0000|
+## |329 |N(HexNAc)GSYPNLSK[1;4;5;0;0]                                                                 |   -2.3321|           9|       1.2222|           0.3333|      2.0| 0.9902|
+## |330 |NGSYPN(HexNAc)LSK[1;4;5;0;0]                                                                 |   -2.3321|           9|       1.2222|           0.3333|      2.0| 0.9902|
+## |340 |N(HexNAc)GSYPN(HexNAc)LSK[1;9;6;1;0]                                                         |   -2.0313|           9|       0.5556|           0.4444|      4.0| 0.9998|
+## |345 |N(HexNAc)GSYPNLSK[1;6;6;2;0]                                                                 |   -3.0949|           9|       0.5556|           0.4444|      4.0| 1.0000|
+## |346 |NGSYPN(HexNAc)LSK[1;6;6;2;0]                                                                 |   -3.0949|           9|       0.5556|           0.4444|      4.0| 1.0000|
+## |350 |N(HexNAc)GSYPN(Deamidated)LSK[1;5;4;0;0]                                                     |   -0.2389|           9|       0.7778|           0.2222|      5.0| 0.9992|
+## |351 |N(HexNAc)GSYPN(HexNAc)LSK[0;9;8;1;0]                                                         |    7.0308|           9|       0.5556|           0.4444|      3.0| 0.9992|
+## |454 |N(HexNAc)GSYPN(HexNAc)LSK[0;12;4;0;0]                                                        |    8.6872|           9|       0.5556|           0.4444|      3.0| 0.9336|
+## |471 |N(HexNAc)GSYPN(HexNAc)LSK[0;13;4;0;0]                                                        |    6.5838|           9|       0.5556|           0.4444|      5.0| 0.9996|
+## |485 |N(HexNAc)GSYPN(Deamidated)LSK[1;7;6;2;0]                                                     |    2.5274|           9|       0.0000|           1.0000|      4.0| 0.9998|
+## |487 |N(Deamidated)GSYPN(HexNAc)LSK[1;4;5;1;0]                                                     |    2.3905|           9|       0.0000|           1.0000|      3.0| 0.9994|
+## |488 |N(HexNAc)GSYPN(Deamidated)LSK[1;4;5;1;0]                                                     |    2.3905|           9|       0.0000|           1.0000|      3.0| 0.9994|
+## |491 |N(HexNAc)GSYPN(Deamidated)LSK[1;6;5;1;0]                                                     |    0.9561|           9|       0.0000|           1.0000|      2.0| 0.9828|
+## |492 |HN(HexNAc)VTR[2;4;5;0;0]                                                                     |   -5.3622|           5|       0.0000|           1.0000|      3.0| 0.9926|
+## |516 |HN(HexNAc)VTR[0;5;2;0;0]                                                                     |   -6.1880|           5|       0.0000|           1.0000|      1.8| 0.9678|
+## |525 |N(HexNAc)GSYPN(Deamidated)LSK[1;5;4;2;0]                                                     |    2.8345|           9|       0.0000|           1.0000|      6.0| 0.9994|
+## |554 |HN(HexNAc)VTR[1;4;5;1;0]                                                                     |   -3.1177|           5|       0.0000|           1.0000|      1.8| 0.9944|
+## |562 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[2;7;6;0;0]                                      |    1.0918|          19|       0.7895|           0.5263|      2.0| 0.9236|
+## |627 |N(HexNAc)GSYPN(HexNAc)LSK[0;6;6;0;0]                                                         |   -2.6125|           9|       0.0000|           1.0000|      5.0| 0.9996|
+## |687 |HN(HexNAc)VTR[2;5;4;0;0]                                                                     |   -2.7862|           5|       0.0000|           1.0000|      1.8| 0.9952|
+## 
+## 
+## |    |Glycopeptide_identifier                                                          | ppm_error| peptideLens| meanCoverage| percentUncovered| numStubs|   tPos|
+## |:---|:--------------------------------------------------------------------------------|---------:|-----------:|------------:|----------------:|--------:|------:|
+## |1   |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;6;5;1;0]                                |   -5.9097|          18|      22.5556|           0.0000|      8.0| 1.0000|
+## |2   |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;6;5;2;0]                       |    1.3485|          22|      26.5909|           0.0000|      8.0| 1.0000|
+## |3   |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;6;5;2;0]                       |    1.3485|          22|      26.0455|           0.0000|      8.0| 1.0000|
+## |4   |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;7;6;1;0]                                |   -3.9412|          18|      20.2222|           0.0000|      9.0| 1.0000|
+## |5   |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;5;4;2;0]                                |   -6.5906|          18|      18.0000|           0.0000|      7.0| 0.9982|
+## |6   |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;7;6;3;0]                                |   -8.5683|          18|      21.6667|           0.0000|      8.0| 0.9994|
+## |7   |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;6;5;3;0]                                |   -6.7784|          18|      18.5000|           0.0000|      6.0| 0.9950|
+## |8   |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;7;6;2;0]                       |    2.8744|          22|      25.0455|           0.0000|      9.0| 1.0000|
+## |9   |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;7;6;2;0]                       |    2.8744|          22|      24.5000|           0.0000|      9.0| 1.0000|
+## |10  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[1;7;6;1;0]               |    2.9786|          22|      22.5000|           0.0000|      9.0| 1.0000|
+## |11  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;4;1;0]                          |   -3.9610|          19|      22.8947|           0.0000|      6.0| 1.0000|
+## |12  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;6;5;0;0]                       |   -2.7807|          22|      20.6364|           0.0000|      8.0| 1.0000|
+## |13  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;4;1;0]                       |   -4.9353|          22|      17.5909|           0.0000|      7.0| 1.0000|
+## |14  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;4;1;0]                       |   -4.9353|          22|      17.5909|           0.0000|      7.0| 1.0000|
+## |15  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;7;6;1;0]                          |   -0.8840|          19|      22.7895|           0.0000|      9.0| 1.0000|
+## |16  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[0;14;4;0;0]              |    9.6761|          22|      29.1364|           0.0000|      7.0| 0.8816|
+## |17  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;5;0;0]                          |   -2.7961|          19|      20.9474|           0.0000|      5.0| 1.0000|
+## |18  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;6;5;0;0]                       |   -2.7807|          22|      20.0909|           0.0000|      8.0| 1.0000|
+## |19  |NGSYPN(HexNAc)LSK[1;5;4;2;0]                                                     |    0.1308|           9|       9.8889|           0.0000|     10.0| 0.9994|
+## |20  |N(HexNAc)GSYPNLSK[1;5;4;2;0]                                                     |    0.1308|           9|       9.0000|           0.0000|     10.0| 0.9994|
+## |21  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;7;6;3;0]                          |   -2.8410|          19|      21.0526|           0.0000|      8.0| 1.0000|
+## |22  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;6;5;1;0]                       |   -0.1015|          22|      22.5000|           0.0000|      7.0| 0.9994|
+## |23  |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[1;7;6;1;0] |   -4.3482|          27|      21.9630|           0.0000|      6.0| 0.9956|
+## |24  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;6;5;2;0]                 |   -1.5373|          28|      22.3929|           0.0000|      1.0| 0.9722|
+## |25  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;6;5;1;0]                       |   -0.1015|          22|      21.9545|           0.0000|      7.0| 0.9994|
+## |26  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;5;1;0]                          |   -3.5609|          19|      18.5789|           0.0000|      8.0| 1.0000|
+## |27  |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[1;5;4;2;0] |   -0.1807|          27|      22.2222|           0.0000|      5.0| 0.9976|
+## |28  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;5;2;0]                          |    0.7980|          19|      18.5789|           0.0000|      5.0| 1.0000|
+## |29  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;7;6;3;0]                 |   -0.4458|          28|      22.9643|           0.0000|      2.0| 0.9980|
+## |30  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;6;5;3;0]                 |    0.4326|          28|      22.5000|           0.0000|      1.0| 0.9596|
+## |31  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;6;5;0;0]                                |   -3.0106|          18|      16.5556|           0.0000|      6.0| 1.0000|
+## |32  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;6;0;0]                       |   -3.5683|          22|      19.4091|           0.0000|      6.0| 1.0000|
+## |33  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;6;0;0]                       |   -3.5683|          22|      19.4091|           0.0000|      6.0| 1.0000|
+## |34  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;7;6;2;0]                          |   -0.0219|          19|      19.6842|           0.0000|      8.0| 0.9994|
+## |35  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;7;6;2;0]                 |   -2.8434|          28|      20.0000|           0.0000|      2.0| 0.9898|
+## |36  |N(HexNAc)VTVTHSVNLLEDSHNGK[1;5;4;1;0]                                            |   -7.4680|          18|      12.3889|           0.0000|      4.0| 0.9996|
+## |37  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;6;2;0]                          |    0.7444|          19|      18.9474|           0.0000|      5.0| 1.0000|
+## |38  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;4;2;0]                          |   -1.2420|          19|      17.6842|           0.0000|      5.0| 1.0000|
+## |39  |DTIC(Carbamidomethyl)IGYHAN(Deamidated)N(HexNAc)STDTVDTVLEK[1;7;6;3;0]           |   -1.5816|          22|      15.9545|           0.0000|      6.0| 1.0000|
+## |40  |DTIC(Carbamidomethyl)IGYHAN(Deamidated)N(HexNAc)STDTVDTVLEK[1;7;6;2;0]           |   -1.5416|          22|      17.0000|           0.0000|      6.0| 1.0000|
+## |41  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(Deamidated)STDTVDTVLEK[1;7;6;3;0]           |   -1.5816|          22|      15.5000|           0.0000|      6.0| 1.0000|
+## |42  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[2;7;6;2;0]                          |    5.9064|          19|      15.6842|           0.0000|      5.0| 1.0000|
+## |43  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;5;4;2;0]                 |   -0.7608|          28|      19.1429|           0.0000|      2.0| 0.9980|
+## |44  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;7;6;0;0]                                |   -2.7114|          18|      14.1111|           0.0000|      6.0| 1.0000|
+## |45  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;7;6;4;0]                          |   -3.7451|          19|      17.9474|           0.0000|      6.0| 1.0000|
+## |46  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(Deamidated)STDTVDTVLEK[1;7;6;2;0]           |   -1.5416|          22|      15.9091|           0.0000|      6.0| 1.0000|
+## |47  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;5;3;0]                          |   -2.2429|          19|      17.1053|           0.0000|      8.0| 1.0000|
+## |48  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;4;2;0]                       |   -4.0561|          22|      14.7727|           0.0000|      6.0| 1.0000|
+## |49  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;4;2;0]                       |   -4.0561|          22|      14.7727|           0.0000|      6.0| 1.0000|
+## |50  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;5;5;1;0]                                |   -8.2882|          18|      14.7222|           0.0000|      5.0| 0.9956|
+## |51  |NGSYPN(HexNAc)LSK[1;4;5;1;0]                                                     |   -1.4933|           9|       8.3333|           0.0000|     10.0| 1.0000|
+## |52  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;5;2;0]                          |   -0.5044|          19|      15.4737|           0.0000|      4.0| 1.0000|
+## |53  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;5;6;1;0]                                |   -7.0563|          18|      12.6667|           0.0000|      8.0| 0.9856|
+## |54  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;5;4;1;0]                 |   -4.1984|          28|      18.5714|           0.0000|      2.0| 0.9894|
+## |55  |NGSYPN(HexNAc)LSK[1;6;5;0;0]                                                     |   -2.2131|           9|       7.2222|           0.0000|      9.0| 1.0000|
+## |56  |HN(HexNAc)VTR[1;5;4;1;0]                                                         |   -1.3984|           5|       2.8000|           0.0000|      3.0| 0.9968|
+## |57  |N(HexNAc)GSYPNLSK[1;4;5;1;0]                                                     |   -1.4933|           9|       6.8889|           0.0000|     10.0| 0.9784|
+## |58  |N(HexNAc)GSYPNLSK[1;6;5;0;0]                                                     |   -2.2131|           9|       7.2222|           0.0000|      9.0| 1.0000|
+## |59  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[0;8;2;0;0]                                |   -2.2699|          18|      14.2222|           0.0000|      2.0| 1.0000|
+## |60  |N(HexNAc)GSYPN(HexNAc)LSK[2;6;6;0;0]                                             |   -1.0568|           9|       9.6667|           0.0000|      9.0| 1.0000|
+## |61  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;6;6;1;0]                                |   -4.3064|          18|      15.0556|           0.0000|      5.0| 1.0000|
+## |62  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;7;6;3;0]                       |   -5.7919|          22|      14.2273|           0.0000|      7.0| 1.0000|
+## |63  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;6;1;0]                       |    3.6927|          22|      15.3182|           0.0000|      7.0| 1.0000|
+## |64  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;6;1;0]                       |    3.6927|          22|      15.3182|           0.0000|      7.0| 1.0000|
+## |65  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;6;1;0]                          |   -2.0419|          19|      13.8947|           0.0000|      3.0| 1.0000|
+## |66  |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[1;6;5;2;0] |   -3.7703|          27|      14.1852|           0.0000|      3.0| 0.9094|
+## |67  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[2;7;6;3;0]                          |    2.5239|          19|      11.0000|           0.0000|      7.0| 1.0000|
+## |68  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;7;6;0;0]                          |    0.4413|          19|      15.4211|           0.0000|      4.0| 1.0000|
+## |69  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;7;6;3;0]                       |   -5.7919|          22|      13.6818|           0.0000|      7.0| 1.0000|
+## |70  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;5;0;0]                       |   -9.2195|          22|      13.2727|           0.0000|      3.0| 0.8270|
+## |71  |NGSYPN(HexNAc)LSK[1;5;4;1;0]                                                     |   -1.8672|           9|       7.8889|           0.0000|      9.0| 0.9996|
+## |72  |N(HexNAc)GSYPNLSK[1;5;4;1;0]                                                     |   -1.8672|           9|       5.7778|           0.0000|      9.0| 1.0000|
+## |73  |N(HexNAc)GSYPNLSK[1;6;5;1;0]                                                     |   -1.5766|           9|       6.4444|           0.0000|     10.0| 0.9986|
+## |74  |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;6;5;1;0]                                |   -5.9097|          18|      14.1111|           0.0000|      8.0| 1.0000|
+## |75  |N(HexNAc)GSYPN(HexNAc)LSK[1;7;6;1;0]                                             |   -0.9177|           9|       6.3333|           0.0000|      8.0| 0.9992|
+## |76  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[1;6;6;0;0]               |    0.1096|          22|      13.4545|           0.0000|      8.0| 0.9990|
+## |77  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;6;6;0;0]                                |   -3.3875|          18|      15.5000|           0.0000|      4.0| 1.0000|
+## |78  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;6;5;1;0]                 |   -5.4029|          28|      15.2500|           0.0000|      1.0| 0.9978|
+## |79  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;5;0;0]                       |   -9.2195|          22|      12.7273|           0.0000|      3.0| 0.8268|
+## |80  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;5;5;0;0]                                |   -4.4787|          18|      11.5000|           0.0000|      2.0| 1.0000|
+## |81  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;4;5;1;0]                          |   -4.0059|          19|      11.0000|           0.0000|      4.0| 0.9998|
+## |82  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;6;0;0]                          |   -0.4635|          19|      12.6842|           0.0000|      3.0| 1.0000|
+## |83  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[1;7;6;0;0]               |   -0.8716|          22|      12.5000|           0.0000|      8.0| 1.0000|
+## |84  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;5;6;0;0]                                |   -2.7455|          18|      13.2778|           0.0000|      6.0| 1.0000|
+## |85  |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;7;6;1;0]                                |   -3.9412|          18|      14.5556|           0.0000|      9.0| 1.0000|
+## |86  |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;5;4;2;0]                                |   -6.5906|          18|      12.8333|           0.0000|      7.0| 0.9982|
+## |87  |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;6;5;3;0]                                |   -6.7784|          18|      14.5000|           0.0000|      6.0| 0.9950|
+## |88  |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;7;6;3;0]                                |   -8.5683|          18|      14.2778|           0.0000|      8.0| 0.9994|
+## |89  |N(HexNAc)VTVTHSVNLLEDSHNGK[1;6;5;1;0]                                            |   -6.4433|          18|       9.7778|           0.0000|      5.0| 0.9944|
+## |90  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[2;7;6;1;0]                          |    0.2467|          19|      10.6316|           0.0000|      6.0| 1.0000|
+## |91  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;5;1;0]                          |   -3.4625|          19|      10.2632|           0.0000|      3.0| 1.0000|
+## |92  |NGSYPN(HexNAc)LSK[2;4;5;0;0]                                                     |   -4.2508|           9|       6.1111|           0.0000|      7.0| 0.9994|
+## |93  |N(HexNAc)GSYPNLSK[2;4;5;0;0]                                                     |   -4.2508|           9|       5.4444|           0.0000|      7.0| 0.9994|
+## |94  |NGSYPN(HexNAc)LSK[1;6;5;1;0]                                                     |   -1.5766|           9|       6.2222|           0.0000|     10.0| 0.9992|
+## |95  |SWSYIAETPN(Deamidated)SEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;7;6;3;0]     |   -0.0952|          28|      13.0000|           0.0000|      1.0| 0.9478|
+## |96  |N(HexNAc)VTVTHSVNLLEDSHNGK[1;7;6;0;0]                                            |   -4.0895|          18|      10.4444|           0.0000|      5.0| 1.0000|
+## |97  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;6;0;0]                          |   -3.0749|          19|      11.8947|           0.0000|      3.0| 0.9994|
+## |98  |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;6;5;0;0]                                |   -3.0106|          18|      12.0000|           0.0000|      6.0| 1.0000|
+## |99  |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[1;7;6;3;0] |    6.3070|          27|      10.2222|           0.0000|      2.0| 0.8130|
+## |100 |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;5;4;0;0]                                |   -4.7866|          18|      10.0000|           0.0000|      2.0| 1.0000|
+## |101 |NGSYPN(HexNAc)LSK[2;5;4;0;0]                                                     |   -1.3818|           9|       6.7778|           0.0000|      6.0| 0.9978|
+## |102 |NGSYPN(HexNAc)LSK[1;6;5;2;0]                                                     |   -1.0611|           9|       6.1111|           0.0000|      9.0| 0.9984|
+## |103 |N(HexNAc)GSYPNLSK[1;6;5;2;0]                                                     |   -1.0611|           9|       5.2222|           0.0000|      9.0| 0.9980|
+## |104 |N(HexNAc)GSYPNLSK[2;5;4;0;0]                                                     |   -1.3818|           9|       5.3333|           0.0000|      6.0| 0.9974|
+## |105 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[0;5;5;2;0] |    4.7947|          27|      16.3333|           0.0000|      0.0| 0.9988|
+## |106 |N(HexNAc)GSYPNLSK[1;4;4;1;0]                                                     |   -1.0866|           9|       4.1111|           0.0000|      8.0| 1.0000|
+## |107 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;4;0;0]                          |   -6.0673|          19|       7.6316|           0.0000|      2.0| 0.9982|
+## |108 |N(Deamidated)GSYPN(HexNAc)LSK[0;6;6;1;0]                                         |    9.4307|           9|       5.5556|           0.0000|      1.0| 0.6746|
+## |109 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[0;6;6;1;0] |   -6.6991|          27|      11.8148|           0.0000|      1.0| 0.9960|
+## |110 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[3;7;6;1;0]               |   -8.1037|          22|       6.6818|           0.0000|      1.0| 0.8650|
+## |111 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;6;6;1;0]                                |   -4.3064|          18|       9.2778|           0.0000|      5.0| 1.0000|
+## |112 |N(HexNAc)VTVTHSVNLLEDSHNGK[1;6;6;0;0]                                            |   -6.7592|          18|       8.3333|           0.0000|      4.0| 0.9900|
+## |113 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;5;5;1;0]                                |   -8.2882|          18|       9.6667|           0.0000|      5.0| 0.9956|
+## |114 |SWSYIAETPN(Deamidated)SEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;7;6;2;0]     |   -1.6746|          28|       8.5000|           0.0000|      1.0| 0.9880|
+## |115 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;6;2;0]                          |    1.0948|          19|       7.0526|           0.0000|      2.0| 0.9974|
+## |116 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;5;6;1;0]                                |   -7.0563|          18|      10.3333|           0.0000|      8.0| 0.9856|
+## |117 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;5;1;0]                       |   -1.6205|          22|       6.8182|           0.0000|      6.0| 0.9918|
+## |118 |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;5;1;0]                       |   -1.6205|          22|       6.8182|           0.0000|      6.0| 0.9896|
+## |119 |NGSYPN(HexNAc)LSK[1;5;4;0;0]                                                     |   -1.8675|           9|       5.1111|           0.0000|      8.0| 0.9996|
+## |120 |N(HexNAc)GSYPNLSK[1;5;4;0;0]                                                     |   -1.8675|           9|       5.1111|           0.0000|      8.0| 0.9998|
+## |121 |N(HexNAc)VTVTHSVNLLEDSHNGK[1;6;5;0;0]                                            |   -4.6859|          18|       8.1667|           0.0000|      5.0| 0.9992|
+## |122 |N(HexNAc)GSYPN(HexNAc)LSK[2;9;6;0;0]                                             |   -3.5034|           9|       5.3333|           0.0000|      8.0| 0.9976|
+## |123 |N(Deamidated)GSYPN(HexNAc)LSK[1;5;4;1;0]                                         |   -1.3280|           9|       5.5556|           0.0000|      6.0| 0.9996|
+## |124 |NGSYPN(HexNAc)LSK[0;5;4;2;0]                                                     |   -0.0550|           9|       4.8889|           0.0000|      6.0| 0.9972|
+## |125 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(Deamidated)STDTVDTVLEK[1;5;4;2;0]           |   -9.7324|          22|       7.6364|           0.0000|      3.0| 0.8244|
+## |126 |DTIC(Carbamidomethyl)IGYHAN(Deamidated)N(HexNAc)STDTVDTVLEK[1;5;4;2;0]           |   -9.7324|          22|       7.5455|           0.0000|      3.0| 0.8244|
+## |127 |N(HexNAc)GSYPNLSK[1;5;6;1;0]                                                     |   -2.0741|           9|       3.5556|           0.0000|      6.0| 1.0000|
+## |128 |NGSYPN(HexNAc)LSK[1;5;6;1;0]                                                     |   -2.0741|           9|       3.5556|           0.0000|      6.0| 1.0000|
+## |129 |NGSYPN(HexNAc)LSK[1;4;4;1;0]                                                     |   -1.0866|           9|       3.8889|           0.0000|      8.0| 1.0000|
+## |130 |N(HexNAc)GSYPNLSK[1;7;6;2;0]                                                     |   -1.5617|           9|       4.5556|           0.0000|      6.0| 0.9968|
+## |131 |NGSYPN(HexNAc)LSK[1;7;6;2;0]                                                     |   -1.5617|           9|       4.5556|           0.0000|      6.0| 0.9968|
+## |132 |N(HexNAc)GSYPNLSK[0;5;4;2;0]                                                     |   -0.0550|           9|       4.0000|           0.0000|      6.0| 0.9990|
+## |133 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[0;8;2;0;0]                                |   -2.2699|          18|       8.0000|           0.0000|      2.0| 1.0000|
+## |134 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[0;5;5;1;0] |    0.1401|          27|       9.7778|           0.0000|      0.0| 0.9828|
+## |135 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;7;6;0;0]                                |   -2.7114|          18|       8.4444|           0.0000|      6.0| 0.9984|
+## |136 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;5;6;0;0]                                |   -2.7455|          18|       8.8889|           0.0000|      6.0| 1.0000|
+## |137 |N(HexNAc)GSYPN(HexNAc)LSK[2;6;9;0;0]                                             |   -4.4694|           9|       6.5556|           0.0000|      7.0| 0.9998|
+## |138 |N(HexNAc)VTVTHSVNLLEDSHNGK[1;7;6;3;0]                                            |   -5.3203|          18|       6.9444|           0.0000|      4.0| 0.9940|
+## |139 |N(HexNAc)GSYPN(HexNAc)LSK[0;14;4;0;0]                                            |    7.7308|           9|       4.5556|           0.0000|      5.0| 0.9696|
+## |140 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[0;6;6;1;0]                          |    1.6958|          19|       5.0526|           0.0000|      0.0| 0.8486|
+## |141 |N(HexNAc)GSYPN(HexNAc)LSK[2;6;8;0;0]                                             |   -3.0549|           9|       3.2222|           0.0000|     10.0| 0.9996|
+## |142 |SWSYIAETPN(Deamidated)SEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[2;7;6;2;0]     |    1.2589|          28|       5.8571|           0.0000|      0.0| 0.9236|
+## |144 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;5;5;0;0]                                |   -4.4787|          18|       7.5000|           0.0000|      2.0| 0.9992|
+## |145 |SWSYIAETPN(Deamidated)SEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;6;5;0;0]     |    4.3525|          28|       6.5000|           0.0000|      0.0| 0.9518|
+## |146 |SWSYIAETPN(Deamidated)SEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;6;5;3;0]     |   -3.4230|          28|       5.1786|           0.0000|      0.0| 0.9564|
+## |147 |DTIC(Carbamidomethyl)IGYHAN(Deamidated)N(HexNAc)STDTVDTVLEK[1;6;5;2;0]           |   -5.5353|          22|       5.2727|           0.0000|      5.0| 0.9960|
+## |148 |N(Deamidated)GSYPN(HexNAc)LSK[0;4;5;1;0]                                         |    8.1210|           9|       3.8889|           0.1111|      0.0| 0.5156|
+## |149 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;6;1;0]                          |   -4.0430|          19|       6.8947|           0.0000|      2.0| 0.9772|
+## |151 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;6;3;0]                          |   -0.6209|          19|       5.9474|           0.0000|      3.0| 0.9986|
+## |152 |NGSYPN(HexNAc)LSK[2;3;6;0;0]                                                     |   -7.2148|           9|       3.3333|           0.1111|      4.0| 0.9446|
+## |153 |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;6;5;0;0]                 |   -3.9020|          28|       7.1786|           0.0000|      0.0| 0.9892|
+## |154 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;5;0;0]                          |   -4.3502|          19|       5.5789|           0.0000|      2.0| 0.9986|
+## |155 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;5;4;0;0]                                |   -4.7866|          18|       7.7222|           0.0000|      2.0| 1.0000|
+## |156 |SWSYIAETPN(Deamidated)SEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;5;4;2;0]     |   -3.9614|          28|       6.3214|           0.0000|      0.0| 0.9976|
+## |157 |NLLWLTEKN(Deamidated)GSYPN(HexNAc)LSKSYVN(Deamidated)N(Deamidated)K[1;7;6;4;0]   |   -3.7097|          23|       8.6957|           0.0000|      0.0| 0.9864|
+## |158 |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;6;6;1;0]                       |    5.7869|          22|       5.5909|           0.0000|      4.0| 0.9974|
+## |159 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;6;6;1;0]                       |    5.7869|          22|       5.5909|           0.0000|      4.0| 0.9964|
+## |160 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(Deamidated)STDTVDTVLEK[1;6;5;2;0]           |   -5.5353|          22|       4.7273|           0.0000|      5.0| 0.9940|
+## |161 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[0;4;5;1;0] |   -8.0917|          27|       6.0741|           0.0000|      0.0| 0.8334|
+## |162 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;6;6;0;0]                                |   -3.3875|          18|       9.1111|           0.0000|      4.0| 1.0000|
+## |164 |N(Deamidated)LLWLTEKN(HexNAc)GSYPNLSKSYVN(Deamidated)N(Deamidated)K[1;7;6;4;0]   |   -3.7097|          23|       6.9565|           0.0000|      0.0| 0.9554|
+## |165 |NGSYPN(HexNAc)LSK[1;7;6;3;0]                                                     |    3.0849|           9|       3.6667|           0.0000|      6.0| 1.0000|
+## |166 |N(HexNAc)GSYPNLSK[1;6;5;3;0]                                                     |    1.8418|           9|       2.5556|           0.0000|      8.0| 0.9984|
+## |167 |NGSYPN(HexNAc)LSK[1;6;5;3;0]                                                     |    1.8418|           9|       2.5556|           0.0000|      8.0| 0.9984|
+## |168 |N(HexNAc)GSYPNLSK[1;7;6;3;0]                                                     |    3.0849|           9|       3.0000|           0.0000|      6.0| 1.0000|
+## |169 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[1;6;6;1;0] |   -9.7402|          27|       5.0741|           0.0000|      0.0| 0.7152|
+## |170 |N(HexNAc)GSYPN(Deamidated)LSK[1;5;4;1;0]                                         |   -1.3280|           9|       2.6667|           0.0000|      6.0| 0.9982|
+## |171 |HN(HexNAc)VTR[1;6;6;1;0]                                                         |    3.5881|           5|       0.8000|           0.4000|      1.8| 1.0000|
+## |172 |N(HexNAc)GSYPN(HexNAc)LSK[2;12;6;0;0]                                            |    2.9929|           9|       2.6667|           0.0000|      7.0| 0.9980|
+## |173 |HN(HexNAc)VTR[1;6;5;0;0]                                                         |    0.6254|           5|       1.0000|           0.0000|      2.7| 1.0000|
+## |174 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;4;6;0;0]                          |   -3.5028|          19|       7.2105|           0.0000|      2.0| 0.9958|
+## |177 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[0;7;6;0;0]               |   -6.6968|          22|       4.6818|           0.0000|      2.0| 0.9116|
+## |178 |DTIC(Carbamidomethyl)IGYHAN(Deamidated)N(HexNAc)STDTVDTVLEK[1;6;5;1;0]           |   -2.1214|          22|       4.5909|           0.0000|      4.0| 0.9874|
+## |179 |N(HexNAc)GSYPNLSK[2;3;6;0;0]                                                     |   -7.2148|           9|       2.4444|           0.2222|      4.0| 0.9554|
+## |180 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;4;6;0;0]                       |   -5.5389|          22|       3.9545|           0.0000|      5.0| 0.9878|
+## |181 |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;4;6;0;0]                       |   -5.5389|          22|       3.9545|           0.0000|      5.0| 0.9874|
+## |184 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[0;4;6;1;0] |   -0.2344|          27|       4.2222|           0.1111|      0.0| 0.5684|
+## |186 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHN(Deamidated)GK[1;7;6;3;0]                    |   -5.4866|          18|       2.5556|           0.0000|      2.0| 0.9932|
+## |189 |N(HexNAc)GSYPN(HexNAc)LSK[2;8;6;1;0]                                             |   -2.9545|           9|       2.4444|           0.1111|      8.0| 0.9992|
+## |190 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;4;0;0]                       |   -2.2514|          22|       4.0455|           0.0000|      4.0| 0.9882|
+## |191 |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;4;0;0]                       |   -2.2514|          22|       4.0455|           0.0000|      4.0| 0.9898|
+## |193 |HN(HexNAc)VTR[0;4;2;0;0]                                                         |   -8.8012|           5|       1.6000|           0.0000|      1.8| 0.7210|
+## |201 |N(Deamidated)GSYPN(HexNAc)LSK[1;7;6;2;0]                                         |    2.5274|           9|       3.0000|           0.1111|      4.0| 0.9942|
+## |202 |N(HexNAc)GSYPN(HexNAc)LSK[2;6;7;0;0]                                             |   -0.6787|           9|       2.5556|           0.0000|      5.0| 0.9980|
+## |203 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(Deamidated)STDTVDTVLEK[1;6;5;1;0]           |   -2.1214|          22|       3.5909|           0.0000|      4.0| 0.9918|
+## |204 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;4;6;1;0]                       |   -2.7934|          22|       4.2727|           0.0000|      3.0| 0.9782|
+## |205 |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;4;6;1;0]                       |   -2.7934|          22|       4.2727|           0.0000|      3.0| 0.9802|
+## |206 |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[0;8;7;0;0]                                |   -4.9256|          18|       5.7778|           0.0000|      3.0| 1.0000|
+## |208 |N(HexNAc)GSYPN(HexNAc)LSKSYVNN(Deamidated)KEK[4;8;11;2;0]                        |    2.5723|          17|       3.0000|           0.0000|      3.0| 0.9988|
+## |209 |N(HexNAc)GSYPN(HexNAc)LSKSYVN(Deamidated)NKEK[4;8;11;2;0]                        |    2.5723|          17|       3.0000|           0.0000|      3.0| 0.9990|
+## |212 |N(Deamidated)GSYPN(HexNAc)LSK[1;5;4;2;0]                                         |    2.8345|           9|       2.1111|           0.1111|      6.0| 1.0000|
+## |214 |N(HexNAc)GSYPN(HexNAc)LSK[2;7;9;0;0]                                             |   -0.7798|           9|       2.2222|           0.0000|      5.0| 0.9998|
+## |215 |N(HexNAc)GSYPN(HexNAc)LSKSYVN(Deamidated)N(Deamidated)K[3;8;8;1;0]               |   -2.2628|          15|       4.7333|           0.0000|      2.0| 0.9946|
+## |216 |N(Deamidated)GSYPN(HexNAc)LSK[1;5;4;0;0]                                         |   -0.2389|           9|       2.2222|           0.0000|      5.0| 1.0000|
+## |217 |N(HexNAc)GSYPN(HexNAc)LSK[2;7;8;0;0]                                             |   -1.8379|           9|       3.5556|           0.0000|      8.0| 1.0000|
+## |233 |N(HexNAc)VTVTHSVNLLEDSHNGK[1;7;6;1;0]                                            |   -6.3796|          18|       2.8333|           0.0000|      3.0| 0.9840|
+## |234 |N(HexNAc)GSYPN(HexNAc)LSK[2;9;6;1;0]                                             |   -1.2417|           9|       2.0000|           0.0000|      9.0| 0.9996|
+## |245 |N(HexNAc)GSYPN(HexNAc)LSK[2;7;8;1;0]                                             |    6.9927|           9|       1.7778|           0.3333|      6.0| 0.9628|
+## |248 |N(HexNAc)GSYPN(HexNAc)LSK[2;7;7;1;0]                                             |   -0.4717|           9|       1.3333|           0.0000|      5.0| 1.0000|
+## |250 |N(HexNAc)GSYPN(HexNAc)LSKSYVN(Deamidated)NK[0;10;10;0;0]                         |   -4.3522|          15|       3.2000|           0.0000|      3.0| 0.9890|
+## |251 |N(HexNAc)GSYPN(HexNAc)LSKSYVNN(Deamidated)K[0;10;10;0;0]                         |   -4.3522|          15|       3.2000|           0.0000|      3.0| 0.9890|
+## |253 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[0;8;7;0;0]                                |   -4.9256|          18|       5.2222|           0.0000|      3.0| 0.9976|
+## |255 |N(Deamidated)GSYPN(HexNAc)LSK[1;6;5;1;0]                                         |    0.9561|           9|       1.4444|           0.1111|      2.0| 0.9986|
+## |264 |N(HexNAc)GSYPN(HexNAc)LSK[1;6;6;0;0]                                             |   -1.6219|           9|       2.0000|           0.1111|      5.0| 0.9998|
+## |265 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;4;5;1;0]                       |   -3.8433|          22|       1.3636|           0.2727|      3.0| 0.9504|
+## |266 |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;4;5;1;0]                       |   -3.8433|          22|       1.3636|           0.2727|      3.0| 0.9504|
+## |291 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[1;8;6;0;0]               |    5.8987|          22|       5.4545|           0.0000|      3.0| 0.9880|
+## |305 |HN(HexNAc)VTR[1;5;4;0;0]                                                         |   -2.0406|           5|       0.2000|           0.8000|      2.7| 0.9996|
+## |311 |HN(HexNAc)VTR[0;7;2;0;0]                                                         |   -3.4059|           5|       0.6000|           0.4000|      1.8| 1.0000|
+## |312 |N(HexNAc)GSYPN(HexNAc)LSK[2;6;5;0;0]                                             |   -2.1511|           9|       0.8889|           0.1111|      5.0| 1.0000|
+## |313 |HN(HexNAc)VTR[1;5;5;0;0]                                                         |   -3.9621|           5|       0.6000|           0.4000|      2.1| 1.0000|
+## |319 |N(HexNAc)GSYPN(HexNAc)LSK[4;9;11;2;0]                                            |    7.9440|           9|       0.8889|           0.1111|      3.0| 0.9836|
+## |320 |N(HexNAc)GSYPNLSK[1;5;5;0;0]                                                     |   -1.6596|           9|       1.2222|           0.3333|      4.0| 0.9998|
+## |321 |NGSYPN(HexNAc)LSK[1;5;5;0;0]                                                     |   -1.6596|           9|       1.2222|           0.3333|      4.0| 0.9998|
+## |327 |N(HexNAc)GSYPNLSK[1;5;6;2;0]                                                     |   -1.4113|           9|       0.5556|           0.4444|      3.0| 0.9994|
+## |328 |NGSYPN(HexNAc)LSK[1;5;6;2;0]                                                     |   -1.4113|           9|       0.5556|           0.4444|      3.0| 0.9994|
+## |329 |N(HexNAc)GSYPNLSK[1;4;5;0;0]                                                     |   -2.3321|           9|       1.2222|           0.3333|      2.0| 0.9996|
+## |330 |NGSYPN(HexNAc)LSK[1;4;5;0;0]                                                     |   -2.3321|           9|       1.2222|           0.3333|      2.0| 0.9996|
+## |340 |N(HexNAc)GSYPN(HexNAc)LSK[1;9;6;1;0]                                             |   -2.0313|           9|       0.5556|           0.4444|      4.0| 0.9992|
+## |345 |N(HexNAc)GSYPNLSK[1;6;6;2;0]                                                     |   -3.0949|           9|       0.5556|           0.4444|      4.0| 0.9998|
+## |346 |NGSYPN(HexNAc)LSK[1;6;6;2;0]                                                     |   -3.0949|           9|       0.5556|           0.4444|      4.0| 0.9998|
+## |350 |N(HexNAc)GSYPN(Deamidated)LSK[1;5;4;0;0]                                         |   -0.2389|           9|       0.7778|           0.2222|      5.0| 0.9998|
+## |351 |N(HexNAc)GSYPN(HexNAc)LSK[0;9;8;1;0]                                             |    7.0308|           9|       0.5556|           0.4444|      3.0| 0.9676|
+## |454 |N(HexNAc)GSYPN(HexNAc)LSK[0;12;4;0;0]                                            |    8.6872|           9|       0.5556|           0.4444|      3.0| 0.9642|
+## |471 |N(HexNAc)GSYPN(HexNAc)LSK[0;13;4;0;0]                                            |    6.5838|           9|       0.5556|           0.4444|      5.0| 0.9984|
+## |485 |N(HexNAc)GSYPN(Deamidated)LSK[1;7;6;2;0]                                         |    2.5274|           9|       0.0000|           1.0000|      4.0| 0.9998|
+## |487 |N(Deamidated)GSYPN(HexNAc)LSK[1;4;5;1;0]                                         |    2.3905|           9|       0.0000|           1.0000|      3.0| 0.9992|
+## |488 |N(HexNAc)GSYPN(Deamidated)LSK[1;4;5;1;0]                                         |    2.3905|           9|       0.0000|           1.0000|      3.0| 0.9992|
+## |491 |N(HexNAc)GSYPN(Deamidated)LSK[1;6;5;1;0]                                         |    0.9561|           9|       0.0000|           1.0000|      2.0| 0.9984|
+## |492 |HN(HexNAc)VTR[2;4;5;0;0]                                                         |   -5.3622|           5|       0.0000|           1.0000|      3.0| 0.9986|
+## |516 |HN(HexNAc)VTR[0;5;2;0;0]                                                         |   -6.1880|           5|       0.0000|           1.0000|      1.8| 0.9964|
+## |525 |N(HexNAc)GSYPN(Deamidated)LSK[1;5;4;2;0]                                         |    2.8345|           9|       0.0000|           1.0000|      6.0| 0.9998|
+## |554 |HN(HexNAc)VTR[1;4;5;1;0]                                                         |   -3.1177|           5|       0.0000|           1.0000|      1.8| 0.9992|
+## |562 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[2;7;6;0;0]                          |    1.0918|          19|       0.7895|           0.5263|      2.0| 0.9960|
+## |627 |N(HexNAc)GSYPN(HexNAc)LSK[0;6;6;0;0]                                             |   -2.6125|           9|       0.0000|           1.0000|      5.0| 0.9998|
+## |687 |HN(HexNAc)VTR[2;5;4;0;0]                                                         |   -2.7862|           5|       0.0000|           1.0000|      1.8| 0.9996|
+## 
+## 
+## |    |Glycopeptide_identifier                                                          | ppm_error| peptideLens| meanCoverage| percentUncovered| numStubs|   tPos|
+## |:---|:--------------------------------------------------------------------------------|---------:|-----------:|------------:|----------------:|--------:|------:|
+## |1   |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;6;5;1;0]                                |   -5.9097|          18|      22.5556|           0.0000|      8.0| 0.9998|
+## |2   |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;6;5;2;0]                       |    1.3485|          22|      26.5909|           0.0000|      8.0| 1.0000|
+## |3   |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;6;5;2;0]                       |    1.3485|          22|      26.0455|           0.0000|      8.0| 1.0000|
+## |4   |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;7;6;1;0]                                |   -3.9412|          18|      20.2222|           0.0000|      9.0| 0.9454|
+## |5   |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;5;4;2;0]                                |   -6.5906|          18|      18.0000|           0.0000|      7.0| 0.9988|
+## |6   |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;7;6;3;0]                                |   -8.5683|          18|      21.6667|           0.0000|      8.0| 1.0000|
+## |7   |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;6;5;3;0]                                |   -6.7784|          18|      18.5000|           0.0000|      6.0| 0.9988|
+## |8   |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;7;6;2;0]                       |    2.8744|          22|      25.0455|           0.0000|      9.0| 1.0000|
+## |9   |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;7;6;2;0]                       |    2.8744|          22|      24.5000|           0.0000|      9.0| 1.0000|
+## |10  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[1;7;6;1;0]               |    2.9786|          22|      22.5000|           0.0000|      9.0| 1.0000|
+## |11  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;4;1;0]                          |   -3.9610|          19|      22.8947|           0.0000|      6.0| 0.9442|
+## |12  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;6;5;0;0]                       |   -2.7807|          22|      20.6364|           0.0000|      8.0| 1.0000|
+## |13  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;4;1;0]                       |   -4.9353|          22|      17.5909|           0.0000|      7.0| 1.0000|
+## |14  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;4;1;0]                       |   -4.9353|          22|      17.5909|           0.0000|      7.0| 1.0000|
+## |15  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;7;6;1;0]                          |   -0.8840|          19|      22.7895|           0.0000|      9.0| 1.0000|
+## |16  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[0;14;4;0;0]              |    9.6761|          22|      29.1364|           0.0000|      7.0| 0.8270|
+## |17  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;5;0;0]                          |   -2.7961|          19|      20.9474|           0.0000|      5.0| 1.0000|
+## |18  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;6;5;0;0]                       |   -2.7807|          22|      20.0909|           0.0000|      8.0| 1.0000|
+## |19  |NGSYPN(HexNAc)LSK[1;5;4;2;0]                                                     |    0.1308|           9|       9.8889|           0.0000|     10.0| 0.9998|
+## |20  |N(HexNAc)GSYPNLSK[1;5;4;2;0]                                                     |    0.1308|           9|       9.0000|           0.0000|     10.0| 0.9998|
+## |21  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;7;6;3;0]                          |   -2.8410|          19|      21.0526|           0.0000|      8.0| 1.0000|
+## |22  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;6;5;1;0]                       |   -0.1015|          22|      22.5000|           0.0000|      7.0| 1.0000|
+## |23  |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[1;7;6;1;0] |   -4.3482|          27|      21.9630|           0.0000|      6.0| 0.9942|
+## |24  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;6;5;2;0]                 |   -1.5373|          28|      22.3929|           0.0000|      1.0| 0.9888|
+## |25  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;6;5;1;0]                       |   -0.1015|          22|      21.9545|           0.0000|      7.0| 1.0000|
+## |26  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;5;1;0]                          |   -3.5609|          19|      18.5789|           0.0000|      8.0| 1.0000|
+## |27  |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[1;5;4;2;0] |   -0.1807|          27|      22.2222|           0.0000|      5.0| 0.9970|
+## |28  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;5;2;0]                          |    0.7980|          19|      18.5789|           0.0000|      5.0| 1.0000|
+## |29  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;7;6;3;0]                 |   -0.4458|          28|      22.9643|           0.0000|      2.0| 0.9992|
+## |30  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;6;5;3;0]                 |    0.4326|          28|      22.5000|           0.0000|      1.0| 0.9882|
+## |31  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;6;5;0;0]                                |   -3.0106|          18|      16.5556|           0.0000|      6.0| 1.0000|
+## |32  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;6;0;0]                       |   -3.5683|          22|      19.4091|           0.0000|      6.0| 1.0000|
+## |33  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;6;0;0]                       |   -3.5683|          22|      19.4091|           0.0000|      6.0| 1.0000|
+## |34  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;7;6;2;0]                          |   -0.0219|          19|      19.6842|           0.0000|      8.0| 1.0000|
+## |35  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;7;6;2;0]                 |   -2.8434|          28|      20.0000|           0.0000|      2.0| 0.9992|
+## |36  |N(HexNAc)VTVTHSVNLLEDSHNGK[1;5;4;1;0]                                            |   -7.4680|          18|      12.3889|           0.0000|      4.0| 0.9998|
+## |37  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;6;2;0]                          |    0.7444|          19|      18.9474|           0.0000|      5.0| 1.0000|
+## |38  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;4;2;0]                          |   -1.2420|          19|      17.6842|           0.0000|      5.0| 1.0000|
+## |39  |DTIC(Carbamidomethyl)IGYHAN(Deamidated)N(HexNAc)STDTVDTVLEK[1;7;6;3;0]           |   -1.5816|          22|      15.9545|           0.0000|      6.0| 1.0000|
+## |40  |DTIC(Carbamidomethyl)IGYHAN(Deamidated)N(HexNAc)STDTVDTVLEK[1;7;6;2;0]           |   -1.5416|          22|      17.0000|           0.0000|      6.0| 1.0000|
+## |41  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(Deamidated)STDTVDTVLEK[1;7;6;3;0]           |   -1.5816|          22|      15.5000|           0.0000|      6.0| 1.0000|
+## |42  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[2;7;6;2;0]                          |    5.9064|          19|      15.6842|           0.0000|      5.0| 0.9996|
+## |43  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;5;4;2;0]                 |   -0.7608|          28|      19.1429|           0.0000|      2.0| 0.9992|
+## |44  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;7;6;0;0]                                |   -2.7114|          18|      14.1111|           0.0000|      6.0| 1.0000|
+## |45  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;7;6;4;0]                          |   -3.7451|          19|      17.9474|           0.0000|      6.0| 1.0000|
+## |46  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(Deamidated)STDTVDTVLEK[1;7;6;2;0]           |   -1.5416|          22|      15.9091|           0.0000|      6.0| 1.0000|
+## |47  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;5;3;0]                          |   -2.2429|          19|      17.1053|           0.0000|      8.0| 1.0000|
+## |48  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;4;2;0]                       |   -4.0561|          22|      14.7727|           0.0000|      6.0| 0.9992|
+## |49  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;4;2;0]                       |   -4.0561|          22|      14.7727|           0.0000|      6.0| 0.9992|
+## |50  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;5;5;1;0]                                |   -8.2882|          18|      14.7222|           0.0000|      5.0| 1.0000|
+## |51  |NGSYPN(HexNAc)LSK[1;4;5;1;0]                                                     |   -1.4933|           9|       8.3333|           0.0000|     10.0| 1.0000|
+## |52  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;5;2;0]                          |   -0.5044|          19|      15.4737|           0.0000|      4.0| 1.0000|
+## |53  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;5;6;1;0]                                |   -7.0563|          18|      12.6667|           0.0000|      8.0| 1.0000|
+## |54  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;5;4;1;0]                 |   -4.1984|          28|      18.5714|           0.0000|      2.0| 0.9930|
+## |55  |NGSYPN(HexNAc)LSK[1;6;5;0;0]                                                     |   -2.2131|           9|       7.2222|           0.0000|      9.0| 1.0000|
+## |56  |HN(HexNAc)VTR[1;5;4;1;0]                                                         |   -1.3984|           5|       2.8000|           0.0000|      3.0| 1.0000|
+## |57  |N(HexNAc)GSYPNLSK[1;4;5;1;0]                                                     |   -1.4933|           9|       6.8889|           0.0000|     10.0| 0.9996|
+## |58  |N(HexNAc)GSYPNLSK[1;6;5;0;0]                                                     |   -2.2131|           9|       7.2222|           0.0000|      9.0| 1.0000|
+## |59  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[0;8;2;0;0]                                |   -2.2699|          18|      14.2222|           0.0000|      2.0| 1.0000|
+## |60  |N(HexNAc)GSYPN(HexNAc)LSK[2;6;6;0;0]                                             |   -1.0568|           9|       9.6667|           0.0000|      9.0| 1.0000|
+## |61  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;6;6;1;0]                                |   -4.3064|          18|      15.0556|           0.0000|      5.0| 1.0000|
+## |62  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;7;6;3;0]                       |   -5.7919|          22|      14.2273|           0.0000|      7.0| 0.9864|
+## |63  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;6;1;0]                       |    3.6927|          22|      15.3182|           0.0000|      7.0| 1.0000|
+## |64  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;6;1;0]                       |    3.6927|          22|      15.3182|           0.0000|      7.0| 1.0000|
+## |65  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;6;1;0]                          |   -2.0419|          19|      13.8947|           0.0000|      3.0| 1.0000|
+## |66  |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[1;6;5;2;0] |   -3.7703|          27|      14.1852|           0.0000|      3.0| 0.9950|
+## |67  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[2;7;6;3;0]                          |    2.5239|          19|      11.0000|           0.0000|      7.0| 1.0000|
+## |68  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;7;6;0;0]                          |    0.4413|          19|      15.4211|           0.0000|      4.0| 1.0000|
+## |69  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;7;6;3;0]                       |   -5.7919|          22|      13.6818|           0.0000|      7.0| 0.9864|
+## |70  |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;5;0;0]                       |   -9.2195|          22|      13.2727|           0.0000|      3.0| 0.9974|
+## |71  |NGSYPN(HexNAc)LSK[1;5;4;1;0]                                                     |   -1.8672|           9|       7.8889|           0.0000|      9.0| 1.0000|
+## |72  |N(HexNAc)GSYPNLSK[1;5;4;1;0]                                                     |   -1.8672|           9|       5.7778|           0.0000|      9.0| 0.9994|
+## |73  |N(HexNAc)GSYPNLSK[1;6;5;1;0]                                                     |   -1.5766|           9|       6.4444|           0.0000|     10.0| 1.0000|
+## |74  |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;6;5;1;0]                                |   -5.9097|          18|      14.1111|           0.0000|      8.0| 0.9998|
+## |75  |N(HexNAc)GSYPN(HexNAc)LSK[1;7;6;1;0]                                             |   -0.9177|           9|       6.3333|           0.0000|      8.0| 0.9900|
+## |76  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[1;6;6;0;0]               |    0.1096|          22|      13.4545|           0.0000|      8.0| 0.9994|
+## |77  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;6;6;0;0]                                |   -3.3875|          18|      15.5000|           0.0000|      4.0| 1.0000|
+## |78  |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;6;5;1;0]                 |   -5.4029|          28|      15.2500|           0.0000|      1.0| 0.9944|
+## |79  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;5;0;0]                       |   -9.2195|          22|      12.7273|           0.0000|      3.0| 0.9972|
+## |80  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;5;5;0;0]                                |   -4.4787|          18|      11.5000|           0.0000|      2.0| 1.0000|
+## |81  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;4;5;1;0]                          |   -4.0059|          19|      11.0000|           0.0000|      4.0| 0.9774|
+## |82  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;6;0;0]                          |   -0.4635|          19|      12.6842|           0.0000|      3.0| 1.0000|
+## |83  |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[1;7;6;0;0]               |   -0.8716|          22|      12.5000|           0.0000|      8.0| 1.0000|
+## |84  |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;5;6;0;0]                                |   -2.7455|          18|      13.2778|           0.0000|      6.0| 1.0000|
+## |85  |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;7;6;1;0]                                |   -3.9412|          18|      14.5556|           0.0000|      9.0| 0.9454|
+## |86  |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;5;4;2;0]                                |   -6.5906|          18|      12.8333|           0.0000|      7.0| 0.9988|
+## |87  |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;6;5;3;0]                                |   -6.7784|          18|      14.5000|           0.0000|      6.0| 0.9988|
+## |88  |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;7;6;3;0]                                |   -8.5683|          18|      14.2778|           0.0000|      8.0| 1.0000|
+## |89  |N(HexNAc)VTVTHSVNLLEDSHNGK[1;6;5;1;0]                                            |   -6.4433|          18|       9.7778|           0.0000|      5.0| 0.9730|
+## |90  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[2;7;6;1;0]                          |    0.2467|          19|      10.6316|           0.0000|      6.0| 1.0000|
+## |91  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;5;1;0]                          |   -3.4625|          19|      10.2632|           0.0000|      3.0| 1.0000|
+## |92  |NGSYPN(HexNAc)LSK[2;4;5;0;0]                                                     |   -4.2508|           9|       6.1111|           0.0000|      7.0| 0.9924|
+## |93  |N(HexNAc)GSYPNLSK[2;4;5;0;0]                                                     |   -4.2508|           9|       5.4444|           0.0000|      7.0| 0.9978|
+## |94  |NGSYPN(HexNAc)LSK[1;6;5;1;0]                                                     |   -1.5766|           9|       6.2222|           0.0000|     10.0| 0.9902|
+## |95  |SWSYIAETPN(Deamidated)SEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;7;6;3;0]     |   -0.0952|          28|      13.0000|           0.0000|      1.0| 0.9882|
+## |96  |N(HexNAc)VTVTHSVNLLEDSHNGK[1;7;6;0;0]                                            |   -4.0895|          18|      10.4444|           0.0000|      5.0| 0.9998|
+## |97  |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;6;0;0]                          |   -3.0749|          19|      11.8947|           0.0000|      3.0| 1.0000|
+## |98  |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;6;5;0;0]                                |   -3.0106|          18|      12.0000|           0.0000|      6.0| 1.0000|
+## |99  |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[1;7;6;3;0] |    6.3070|          27|      10.2222|           0.0000|      2.0| 0.9612|
+## |100 |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[1;5;4;0;0]                                |   -4.7866|          18|      10.0000|           0.0000|      2.0| 1.0000|
+## |101 |NGSYPN(HexNAc)LSK[2;5;4;0;0]                                                     |   -1.3818|           9|       6.7778|           0.0000|      6.0| 0.9960|
+## |102 |NGSYPN(HexNAc)LSK[1;6;5;2;0]                                                     |   -1.0611|           9|       6.1111|           0.0000|      9.0| 0.9958|
+## |103 |N(HexNAc)GSYPNLSK[1;6;5;2;0]                                                     |   -1.0611|           9|       5.2222|           0.0000|      9.0| 1.0000|
+## |104 |N(HexNAc)GSYPNLSK[2;5;4;0;0]                                                     |   -1.3818|           9|       5.3333|           0.0000|      6.0| 1.0000|
+## |105 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[0;5;5;2;0] |    4.7947|          27|      16.3333|           0.0000|      0.0| 0.9768|
+## |106 |N(HexNAc)GSYPNLSK[1;4;4;1;0]                                                     |   -1.0866|           9|       4.1111|           0.0000|      8.0| 0.9996|
+## |107 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;4;0;0]                          |   -6.0673|          19|       7.6316|           0.0000|      2.0| 0.9988|
+## |108 |N(Deamidated)GSYPN(HexNAc)LSK[0;6;6;1;0]                                         |    9.4307|           9|       5.5556|           0.0000|      1.0| 0.6376|
+## |109 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[0;6;6;1;0] |   -6.6991|          27|      11.8148|           0.0000|      1.0| 0.9844|
+## |111 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;6;6;1;0]                                |   -4.3064|          18|       9.2778|           0.0000|      5.0| 1.0000|
+## |112 |N(HexNAc)VTVTHSVNLLEDSHNGK[1;6;6;0;0]                                            |   -6.7592|          18|       8.3333|           0.0000|      4.0| 0.9982|
+## |113 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;5;5;1;0]                                |   -8.2882|          18|       9.6667|           0.0000|      5.0| 1.0000|
+## |114 |SWSYIAETPN(Deamidated)SEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;7;6;2;0]     |   -1.6746|          28|       8.5000|           0.0000|      1.0| 0.9606|
+## |115 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;6;2;0]                          |    1.0948|          19|       7.0526|           0.0000|      2.0| 0.9998|
+## |116 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;5;6;1;0]                                |   -7.0563|          18|      10.3333|           0.0000|      8.0| 1.0000|
+## |117 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;5;1;0]                       |   -1.6205|          22|       6.8182|           0.0000|      6.0| 0.9958|
+## |118 |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;5;1;0]                       |   -1.6205|          22|       6.8182|           0.0000|      6.0| 0.9958|
+## |119 |NGSYPN(HexNAc)LSK[1;5;4;0;0]                                                     |   -1.8675|           9|       5.1111|           0.0000|      8.0| 1.0000|
+## |120 |N(HexNAc)GSYPNLSK[1;5;4;0;0]                                                     |   -1.8675|           9|       5.1111|           0.0000|      8.0| 1.0000|
+## |121 |N(HexNAc)VTVTHSVNLLEDSHNGK[1;6;5;0;0]                                            |   -4.6859|          18|       8.1667|           0.0000|      5.0| 0.9992|
+## |122 |N(HexNAc)GSYPN(HexNAc)LSK[2;9;6;0;0]                                             |   -3.5034|           9|       5.3333|           0.0000|      8.0| 0.9978|
+## |123 |N(Deamidated)GSYPN(HexNAc)LSK[1;5;4;1;0]                                         |   -1.3280|           9|       5.5556|           0.0000|      6.0| 0.9994|
+## |124 |NGSYPN(HexNAc)LSK[0;5;4;2;0]                                                     |   -0.0550|           9|       4.8889|           0.0000|      6.0| 0.9990|
+## |125 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(Deamidated)STDTVDTVLEK[1;5;4;2;0]           |   -9.7324|          22|       7.6364|           0.0000|      3.0| 0.8258|
+## |126 |DTIC(Carbamidomethyl)IGYHAN(Deamidated)N(HexNAc)STDTVDTVLEK[1;5;4;2;0]           |   -9.7324|          22|       7.5455|           0.0000|      3.0| 0.8256|
+## |127 |N(HexNAc)GSYPNLSK[1;5;6;1;0]                                                     |   -2.0741|           9|       3.5556|           0.0000|      6.0| 1.0000|
+## |128 |NGSYPN(HexNAc)LSK[1;5;6;1;0]                                                     |   -2.0741|           9|       3.5556|           0.0000|      6.0| 1.0000|
+## |129 |NGSYPN(HexNAc)LSK[1;4;4;1;0]                                                     |   -1.0866|           9|       3.8889|           0.0000|      8.0| 0.9956|
+## |130 |N(HexNAc)GSYPNLSK[1;7;6;2;0]                                                     |   -1.5617|           9|       4.5556|           0.0000|      6.0| 1.0000|
+## |131 |NGSYPN(HexNAc)LSK[1;7;6;2;0]                                                     |   -1.5617|           9|       4.5556|           0.0000|      6.0| 1.0000|
+## |132 |N(HexNAc)GSYPNLSK[0;5;4;2;0]                                                     |   -0.0550|           9|       4.0000|           0.0000|      6.0| 0.9996|
+## |133 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[0;8;2;0;0]                                |   -2.2699|          18|       8.0000|           0.0000|      2.0| 1.0000|
+## |134 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[0;5;5;1;0] |    0.1401|          27|       9.7778|           0.0000|      0.0| 0.9646|
+## |135 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;7;6;0;0]                                |   -2.7114|          18|       8.4444|           0.0000|      6.0| 1.0000|
+## |136 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;5;6;0;0]                                |   -2.7455|          18|       8.8889|           0.0000|      6.0| 1.0000|
+## |137 |N(HexNAc)GSYPN(HexNAc)LSK[2;6;9;0;0]                                             |   -4.4694|           9|       6.5556|           0.0000|      7.0| 0.9922|
+## |138 |N(HexNAc)VTVTHSVNLLEDSHNGK[1;7;6;3;0]                                            |   -5.3203|          18|       6.9444|           0.0000|      4.0| 0.9992|
+## |139 |N(HexNAc)GSYPN(HexNAc)LSK[0;14;4;0;0]                                            |    7.7308|           9|       4.5556|           0.0000|      5.0| 0.9998|
+## |140 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[0;6;6;1;0]                          |    1.6958|          19|       5.0526|           0.0000|      0.0| 0.5720|
+## |141 |N(HexNAc)GSYPN(HexNAc)LSK[2;6;8;0;0]                                             |   -3.0549|           9|       3.2222|           0.0000|     10.0| 0.9998|
+## |142 |SWSYIAETPN(Deamidated)SEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[2;7;6;2;0]     |    1.2589|          28|       5.8571|           0.0000|      0.0| 0.6692|
+## |144 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;5;5;0;0]                                |   -4.4787|          18|       7.5000|           0.0000|      2.0| 0.9992|
+## |145 |SWSYIAETPN(Deamidated)SEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;6;5;0;0]     |    4.3525|          28|       6.5000|           0.0000|      0.0| 0.8340|
+## |146 |SWSYIAETPN(Deamidated)SEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;6;5;3;0]     |   -3.4230|          28|       5.1786|           0.0000|      0.0| 0.8204|
+## |147 |DTIC(Carbamidomethyl)IGYHAN(Deamidated)N(HexNAc)STDTVDTVLEK[1;6;5;2;0]           |   -5.5353|          22|       5.2727|           0.0000|      5.0| 0.9952|
+## |149 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;6;1;0]                          |   -4.0430|          19|       6.8947|           0.0000|      2.0| 0.9978|
+## |151 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;6;6;3;0]                          |   -0.6209|          19|       5.9474|           0.0000|      3.0| 0.9986|
+## |152 |NGSYPN(HexNAc)LSK[2;3;6;0;0]                                                     |   -7.2148|           9|       3.3333|           0.1111|      4.0| 0.9994|
+## |153 |SWSYIAETPNSEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;6;5;0;0]                 |   -3.9020|          28|       7.1786|           0.0000|      0.0| 0.8940|
+## |154 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;5;5;0;0]                          |   -4.3502|          19|       5.5789|           0.0000|      2.0| 0.9938|
+## |155 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;5;4;0;0]                                |   -4.7866|          18|       7.7222|           0.0000|      2.0| 1.0000|
+## |156 |SWSYIAETPN(Deamidated)SEN(HexNAc)GTC(Carbamidomethyl)YPGYFADYEELR[1;5;4;2;0]     |   -3.9614|          28|       6.3214|           0.0000|      0.0| 0.7024|
+## |157 |NLLWLTEKN(Deamidated)GSYPN(HexNAc)LSKSYVN(Deamidated)N(Deamidated)K[1;7;6;4;0]   |   -3.7097|          23|       8.6957|           0.0000|      0.0| 0.7236|
+## |158 |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;6;6;1;0]                       |    5.7869|          22|       5.5909|           0.0000|      4.0| 0.9860|
+## |159 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;6;6;1;0]                       |    5.7869|          22|       5.5909|           0.0000|      4.0| 0.9856|
+## |160 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(Deamidated)STDTVDTVLEK[1;6;5;2;0]           |   -5.5353|          22|       4.7273|           0.0000|      5.0| 0.9986|
+## |161 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[0;4;5;1;0] |   -8.0917|          27|       6.0741|           0.0000|      0.0| 0.8384|
+## |162 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[1;6;6;0;0]                                |   -3.3875|          18|       9.1111|           0.0000|      4.0| 1.0000|
+## |164 |N(Deamidated)LLWLTEKN(HexNAc)GSYPNLSKSYVN(Deamidated)N(Deamidated)K[1;7;6;4;0]   |   -3.7097|          23|       6.9565|           0.0000|      0.0| 0.7304|
+## |165 |NGSYPN(HexNAc)LSK[1;7;6;3;0]                                                     |    3.0849|           9|       3.6667|           0.0000|      6.0| 0.9992|
+## |166 |N(HexNAc)GSYPNLSK[1;6;5;3;0]                                                     |    1.8418|           9|       2.5556|           0.0000|      8.0| 1.0000|
+## |167 |NGSYPN(HexNAc)LSK[1;6;5;3;0]                                                     |    1.8418|           9|       2.5556|           0.0000|      8.0| 1.0000|
+## |168 |N(HexNAc)GSYPNLSK[1;7;6;3;0]                                                     |    3.0849|           9|       3.0000|           0.0000|      6.0| 1.0000|
+## |169 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[1;6;6;1;0] |   -9.7402|          27|       5.0741|           0.0000|      0.0| 0.8240|
+## |170 |N(HexNAc)GSYPN(Deamidated)LSK[1;5;4;1;0]                                         |   -1.3280|           9|       2.6667|           0.0000|      6.0| 1.0000|
+## |171 |HN(HexNAc)VTR[1;6;6;1;0]                                                         |    3.5881|           5|       0.8000|           0.4000|      1.8| 0.9992|
+## |172 |N(HexNAc)GSYPN(HexNAc)LSK[2;12;6;0;0]                                            |    2.9929|           9|       2.6667|           0.0000|      7.0| 0.9998|
+## |173 |HN(HexNAc)VTR[1;6;5;0;0]                                                         |    0.6254|           5|       1.0000|           0.0000|      2.7| 1.0000|
+## |174 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[1;4;6;0;0]                          |   -3.5028|          19|       7.2105|           0.0000|      2.0| 1.0000|
+## |177 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[0;7;6;0;0]               |   -6.6968|          22|       4.6818|           0.0000|      2.0| 0.9980|
+## |178 |DTIC(Carbamidomethyl)IGYHAN(Deamidated)N(HexNAc)STDTVDTVLEK[1;6;5;1;0]           |   -2.1214|          22|       4.5909|           0.0000|      4.0| 0.9996|
+## |179 |N(HexNAc)GSYPNLSK[2;3;6;0;0]                                                     |   -7.2148|           9|       2.4444|           0.2222|      4.0| 0.9984|
+## |180 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;4;6;0;0]                       |   -5.5389|          22|       3.9545|           0.0000|      5.0| 0.9968|
+## |181 |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;4;6;0;0]                       |   -5.5389|          22|       3.9545|           0.0000|      5.0| 0.9968|
+## |184 |C(Carbamidomethyl)QTPQGAIN(HexNAc)SSLPFQNIHPVTIGEC(Carbamidomethyl)PK[0;4;6;1;0] |   -0.2344|          27|       4.2222|           0.1111|      0.0| 0.5954|
+## |186 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHN(Deamidated)GK[1;7;6;3;0]                    |   -5.4866|          18|       2.5556|           0.0000|      2.0| 0.9994|
+## |189 |N(HexNAc)GSYPN(HexNAc)LSK[2;8;6;1;0]                                             |   -2.9545|           9|       2.4444|           0.1111|      8.0| 1.0000|
+## |190 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;5;4;0;0]                       |   -2.2514|          22|       4.0455|           0.0000|      4.0| 0.9988|
+## |191 |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;5;4;0;0]                       |   -2.2514|          22|       4.0455|           0.0000|      4.0| 0.9992|
+## |193 |HN(HexNAc)VTR[0;4;2;0;0]                                                         |   -8.8012|           5|       1.6000|           0.0000|      1.8| 0.9944|
+## |201 |N(Deamidated)GSYPN(HexNAc)LSK[1;7;6;2;0]                                         |    2.5274|           9|       3.0000|           0.1111|      4.0| 1.0000|
+## |202 |N(HexNAc)GSYPN(HexNAc)LSK[2;6;7;0;0]                                             |   -0.6787|           9|       2.5556|           0.0000|      5.0| 1.0000|
+## |203 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(Deamidated)STDTVDTVLEK[1;6;5;1;0]           |   -2.1214|          22|       3.5909|           0.0000|      4.0| 0.9996|
+## |204 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;4;6;1;0]                       |   -2.7934|          22|       4.2727|           0.0000|      3.0| 0.9992|
+## |205 |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;4;6;1;0]                       |   -2.7934|          22|       4.2727|           0.0000|      3.0| 0.9994|
+## |206 |N(HexNAc)VTVTHSVNLLEDSHN(Deamidated)GK[0;8;7;0;0]                                |   -4.9256|          18|       5.7778|           0.0000|      3.0| 0.9988|
+## |208 |N(HexNAc)GSYPN(HexNAc)LSKSYVNN(Deamidated)KEK[4;8;11;2;0]                        |    2.5723|          17|       3.0000|           0.0000|      3.0| 0.9998|
+## |209 |N(HexNAc)GSYPN(HexNAc)LSKSYVN(Deamidated)NKEK[4;8;11;2;0]                        |    2.5723|          17|       3.0000|           0.0000|      3.0| 0.9996|
+## |212 |N(Deamidated)GSYPN(HexNAc)LSK[1;5;4;2;0]                                         |    2.8345|           9|       2.1111|           0.1111|      6.0| 1.0000|
+## |214 |N(HexNAc)GSYPN(HexNAc)LSK[2;7;9;0;0]                                             |   -0.7798|           9|       2.2222|           0.0000|      5.0| 1.0000|
+## |215 |N(HexNAc)GSYPN(HexNAc)LSKSYVN(Deamidated)N(Deamidated)K[3;8;8;1;0]               |   -2.2628|          15|       4.7333|           0.0000|      2.0| 0.9978|
+## |216 |N(Deamidated)GSYPN(HexNAc)LSK[1;5;4;0;0]                                         |   -0.2389|           9|       2.2222|           0.0000|      5.0| 1.0000|
+## |217 |N(HexNAc)GSYPN(HexNAc)LSK[2;7;8;0;0]                                             |   -1.8379|           9|       3.5556|           0.0000|      8.0| 0.9998|
+## |233 |N(HexNAc)VTVTHSVNLLEDSHNGK[1;7;6;1;0]                                            |   -6.3796|          18|       2.8333|           0.0000|      3.0| 0.9922|
+## |234 |N(HexNAc)GSYPN(HexNAc)LSK[2;9;6;1;0]                                             |   -1.2417|           9|       2.0000|           0.0000|      9.0| 0.9990|
+## |245 |N(HexNAc)GSYPN(HexNAc)LSK[2;7;8;1;0]                                             |    6.9927|           9|       1.7778|           0.3333|      6.0| 0.9986|
+## |248 |N(HexNAc)GSYPN(HexNAc)LSK[2;7;7;1;0]                                             |   -0.4717|           9|       1.3333|           0.0000|      5.0| 1.0000|
+## |250 |N(HexNAc)GSYPN(HexNAc)LSKSYVN(Deamidated)NK[0;10;10;0;0]                         |   -4.3522|          15|       3.2000|           0.0000|      3.0| 0.9976|
+## |251 |N(HexNAc)GSYPN(HexNAc)LSKSYVNN(Deamidated)K[0;10;10;0;0]                         |   -4.3522|          15|       3.2000|           0.0000|      3.0| 0.9976|
+## |253 |N(HexNAc)VTVTHSVN(Deamidated)LLEDSHNGK[0;8;7;0;0]                                |   -4.9256|          18|       5.2222|           0.0000|      3.0| 0.9994|
+## |255 |N(Deamidated)GSYPN(HexNAc)LSK[1;6;5;1;0]                                         |    0.9561|           9|       1.4444|           0.1111|      2.0| 0.9986|
+## |264 |N(HexNAc)GSYPN(HexNAc)LSK[1;6;6;0;0]                                             |   -1.6219|           9|       2.0000|           0.1111|      5.0| 0.9992|
+## |265 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)NSTDTVDTVLEK[1;4;5;1;0]                       |   -3.8433|          22|       1.3636|           0.2727|      3.0| 0.9930|
+## |266 |DTIC(Carbamidomethyl)IGYHANN(HexNAc)STDTVDTVLEK[1;4;5;1;0]                       |   -3.8433|          22|       1.3636|           0.2727|      3.0| 0.9930|
+## |291 |DTIC(Carbamidomethyl)IGYHAN(HexNAc)N(HexNAc)STDTVDTVLEK[1;8;6;0;0]               |    5.8987|          22|       5.4545|           0.0000|      3.0| 0.9882|
+## |305 |HN(HexNAc)VTR[1;5;4;0;0]                                                         |   -2.0406|           5|       0.2000|           0.8000|      2.7| 0.9616|
+## |311 |HN(HexNAc)VTR[0;7;2;0;0]                                                         |   -3.4059|           5|       0.6000|           0.4000|      1.8| 0.9990|
+## |312 |N(HexNAc)GSYPN(HexNAc)LSK[2;6;5;0;0]                                             |   -2.1511|           9|       0.8889|           0.1111|      5.0| 1.0000|
+## |313 |HN(HexNAc)VTR[1;5;5;0;0]                                                         |   -3.9621|           5|       0.6000|           0.4000|      2.1| 0.9558|
+## |319 |N(HexNAc)GSYPN(HexNAc)LSK[4;9;11;2;0]                                            |    7.9440|           9|       0.8889|           0.1111|      3.0| 0.9988|
+## |320 |N(HexNAc)GSYPNLSK[1;5;5;0;0]                                                     |   -1.6596|           9|       1.2222|           0.3333|      4.0| 1.0000|
+## |321 |NGSYPN(HexNAc)LSK[1;5;5;0;0]                                                     |   -1.6596|           9|       1.2222|           0.3333|      4.0| 1.0000|
+## |327 |N(HexNAc)GSYPNLSK[1;5;6;2;0]                                                     |   -1.4113|           9|       0.5556|           0.4444|      3.0| 1.0000|
+## |328 |NGSYPN(HexNAc)LSK[1;5;6;2;0]                                                     |   -1.4113|           9|       0.5556|           0.4444|      3.0| 1.0000|
+## |329 |N(HexNAc)GSYPNLSK[1;4;5;0;0]                                                     |   -2.3321|           9|       1.2222|           0.3333|      2.0| 0.9992|
+## |330 |NGSYPN(HexNAc)LSK[1;4;5;0;0]                                                     |   -2.3321|           9|       1.2222|           0.3333|      2.0| 0.9992|
+## |340 |N(HexNAc)GSYPN(HexNAc)LSK[1;9;6;1;0]                                             |   -2.0313|           9|       0.5556|           0.4444|      4.0| 1.0000|
+## |345 |N(HexNAc)GSYPNLSK[1;6;6;2;0]                                                     |   -3.0949|           9|       0.5556|           0.4444|      4.0| 1.0000|
+## |346 |NGSYPN(HexNAc)LSK[1;6;6;2;0]                                                     |   -3.0949|           9|       0.5556|           0.4444|      4.0| 1.0000|
+## |350 |N(HexNAc)GSYPN(Deamidated)LSK[1;5;4;0;0]                                         |   -0.2389|           9|       0.7778|           0.2222|      5.0| 1.0000|
+## |351 |N(HexNAc)GSYPN(HexNAc)LSK[0;9;8;1;0]                                             |    7.0308|           9|       0.5556|           0.4444|      3.0| 0.9910|
+## |454 |N(HexNAc)GSYPN(HexNAc)LSK[0;12;4;0;0]                                            |    8.6872|           9|       0.5556|           0.4444|      3.0| 0.9852|
+## |471 |N(HexNAc)GSYPN(HexNAc)LSK[0;13;4;0;0]                                            |    6.5838|           9|       0.5556|           0.4444|      5.0| 0.9908|
+## |485 |N(HexNAc)GSYPN(Deamidated)LSK[1;7;6;2;0]                                         |    2.5274|           9|       0.0000|           1.0000|      4.0| 0.9992|
+## |487 |N(Deamidated)GSYPN(HexNAc)LSK[1;4;5;1;0]                                         |    2.3905|           9|       0.0000|           1.0000|      3.0| 0.9992|
+## |488 |N(HexNAc)GSYPN(Deamidated)LSK[1;4;5;1;0]                                         |    2.3905|           9|       0.0000|           1.0000|      3.0| 0.9992|
+## |491 |N(HexNAc)GSYPN(Deamidated)LSK[1;6;5;1;0]                                         |    0.9561|           9|       0.0000|           1.0000|      2.0| 0.9964|
+## |492 |HN(HexNAc)VTR[2;4;5;0;0]                                                         |   -5.3622|           5|       0.0000|           1.0000|      3.0| 0.9992|
+## |516 |HN(HexNAc)VTR[0;5;2;0;0]                                                         |   -6.1880|           5|       0.0000|           1.0000|      1.8| 0.9876|
+## |525 |N(HexNAc)GSYPN(Deamidated)LSK[1;5;4;2;0]                                         |    2.8345|           9|       0.0000|           1.0000|      6.0| 0.9992|
+## |554 |HN(HexNAc)VTR[1;4;5;1;0]                                                         |   -3.1177|           5|       0.0000|           1.0000|      1.8| 0.9970|
+## |562 |GFGSGIITSN(HexNAc)ASMDEC(Carbamidomethyl)DTK[2;7;6;0;0]                          |    1.0918|          19|       0.7895|           0.5263|      2.0| 0.9810|
+## |627 |N(HexNAc)GSYPN(HexNAc)LSK[0;6;6;0;0]                                             |   -2.6125|           9|       0.0000|           1.0000|      5.0| 0.9992|
+## |687 |HN(HexNAc)VTR[2;5;4;0;0]                                                         |   -2.7862|           5|       0.0000|           1.0000|      1.8| 0.9976|
+</code></pre>
+
+<pre><code class="r">trueNegatives&lt;-lapply(newLabels, function(x){
+  kable(x[[&quot;tNeg&quot;]][,c(&#39;Glycopeptide_identifier&#39;, &quot;ppm_error&quot;, &#39;peptideLens&#39;,&quot;meanCoverage&quot;, &quot;percentUncovered&quot;, &quot;numStubs&quot;, &#39;tNeg&#39;)])
+  })
+</code></pre>
+
+<pre><code>## Warning: no non-missing arguments to max; returning -Inf
+## Warning: no non-missing arguments to max; returning -Inf
+## Warning: no non-missing arguments to max; returning -Inf
+## Warning: no non-missing arguments to max; returning -Inf
+## Warning: no non-missing arguments to max; returning -Inf
+## Warning: no non-missing arguments to max; returning -Inf
+## Warning: no non-missing arguments to max; returning -Inf
+</code></pre>
+
+<pre><code>## 
+## 
+## |Glycopeptide_identifier | ppm_error| peptideLens| meanCoverage| percentUncovered| numStubs| tNeg|
+## |:-----------------------|---------:|-----------:|------------:|----------------:|--------:|----:|
+## 
+## 
+## |    |Glycopeptide_identifier                                                        | ppm_error| peptideLens| meanCoverage| percentUncovered| numStubs|   tNeg|
+## |:---|:------------------------------------------------------------------------------|---------:|-----------:|------------:|----------------:|--------:|------:|
+## |175 |N(Deamidated)LLWLTEKNGSYPN(HexNAc)LSKSYVN(Deamidated)N(Deamidated)K[1;7;6;4;0] |    -3.710|          23|        6.957|           0.0000|        0| 0.9552|
+## |194 |N(Deamidated)LLWLTEKN(HexNAc)GSYPN(Deamidated)LSKSYVN(Deamidated)NK[1;5;4;2;0] |    -3.987|          23|        5.304|           0.0000|        0| 0.7548|
+## |195 |N(Deamidated)LLWLTEKN(HexNAc)GSYPN(Deamidated)LSKSYVNN(Deamidated)K[1;5;4;2;0] |    -3.987|          23|        5.304|           0.0000|        0| 0.7548|
+## |196 |N(Deamidated)LLWLTEKN(Deamidated)GSYPN(HexNAc)LSKSYVN(Deamidated)NK[1;5;4;2;0] |    -3.987|          23|        5.783|           0.0000|        0| 0.8544|
+## |197 |N(Deamidated)LLWLTEKN(Deamidated)GSYPN(HexNAc)LSKSYVNN(Deamidated)K[1;5;4;2;0] |    -3.987|          23|        5.783|           0.0000|        0| 0.8544|
+## |198 |NLLWLTEKN(HexNAc)GSYPN(Deamidated)LSKSYVN(Deamidated)N(Deamidated)K[1;7;6;4;0] |    -3.710|          23|        6.217|           0.0000|        0| 0.9696|
+## |199 |N(Deamidated)LLWLTEKN(HexNAc)GSYPN(Deamidated)LSKSYVNN(Deamidated)K[1;7;6;4;0] |    -3.710|          23|        6.696|           0.0000|        0| 0.9504|
+## |210 |NLLWLTEKN(HexNAc)GSYPN(Deamidated)LSKSYVN(Deamidated)N(Deamidated)K[1;5;4;2;0] |    -3.987|          23|        5.000|           0.0000|        0| 0.6472|
+## |218 |N(Deamidated)LLWLTEKN(HexNAc)GSYPN(Deamidated)LSKSYVN(Deamidated)NK[1;7;6;4;0] |    -3.710|          23|        5.783|           0.0000|        0| 0.8532|
+## |249 |N(Deamidated)LLWLTEKN(Deamidated)GSYPN(HexNAc)LSKSYVNN(Deamidated)K[1;7;6;4;0] |    -3.710|          23|        5.087|           0.0000|        0| 0.7796|
+## |252 |N(Deamidated)LLWLTEKN(HexNAc)GSYPN(HexNAc)LSKSYVNNK[1;8;6;0;0]                 |    -7.327|          23|        5.913|           0.0000|        1| 0.6518|
+## |295 |N(HexNAc)GSYPN(HexNAc)LSKSYVN(Deamidated)NK[2;11;7;0;0]                        |     9.544|          15|        2.133|           0.2000|        2| 0.7496|
+## |296 |N(HexNAc)GSYPN(HexNAc)LSKSYVNN(Deamidated)K[2;11;7;0;0]                        |     9.544|          15|        2.133|           0.2000|        2| 0.7496|
+## |314 |N(HexNAc)GSYPN(HexNAc)LSK[3;14;13;0;0]                                         |     7.494|           9|        1.222|           0.5556|        2| 0.9880|
+## 
+## 
+## |    |Glycopeptide_identifier                                                        | ppm_error| peptideLens| meanCoverage| percentUncovered| numStubs|   tNeg|
+## |:---|:------------------------------------------------------------------------------|---------:|-----------:|------------:|----------------:|--------:|------:|
+## |175 |N(Deamidated)LLWLTEKNGSYPN(HexNAc)LSKSYVN(Deamidated)N(Deamidated)K[1;7;6;4;0] |    -3.710|          23|        6.957|           0.0000|        0| 0.6490|
+## |295 |N(HexNAc)GSYPN(HexNAc)LSKSYVN(Deamidated)NK[2;11;7;0;0]                        |     9.544|          15|        2.133|           0.2000|        2| 0.8664|
+## |296 |N(HexNAc)GSYPN(HexNAc)LSKSYVNN(Deamidated)K[2;11;7;0;0]                        |     9.544|          15|        2.133|           0.2000|        2| 0.8664|
+## |314 |N(HexNAc)GSYPN(HexNAc)LSK[3;14;13;0;0]                                         |     7.494|           9|        1.222|           0.5556|        2| 0.9888|
+</code></pre>
+
+</body>
+
+</html>
+
