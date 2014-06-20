@@ -5,12 +5,12 @@ date: "Tuesday, June 17, 2014"
 output:
   html_document:
     fig_height: 8
-    fig_width: 8
+    fig_width: 15
     number_sections: yes
     theme: journal
     toc: yes
 ---
-# Model Fit Test
+<style>body{max-width:100% !important;}</style>
 ```{r imports, include=FALSE}
 require(knitr)
 opts_chunk$set(fig.width = 15)
@@ -20,13 +20,14 @@ opts_chunk$set(fig.width = 15)
 (require(randomForest))
 (require(data.table))
 (require(lubridate))
+require(ROCR)
 (source("../../Scripts/label-and-disambiguate.R"))
 (source("../../Scripts/run-analysis.R"))
 
 set.seed(1)
 ```
 
-```{r %sCHUNK_LABEL_HERE}
+```{r load-params, %sCHUNK_LABEL_HERE}
 ```
 
 ```{r defaults, echo=FALSE}
@@ -45,21 +46,29 @@ if(!exists("ntree")){
   print("default ntree")
 }
 print(paste("ntree", ntree))
-```
 
+if(!exists("RUN_ID")){
+  RUN_ID <- paste("UNLABELED_RUN", format(now(), format="%Y-%m-%d_%H-%M-%S"), sep = "-")
+}
+
+```
+# `r RUN_ID` Model Fit Test 
 ## Load Data
-```{r load-data, cache=TRUE}
+```{r load-data, cache=F, include = F}
 USSRLabel <- prepareAnnotatedModel("../../USSR//20131219_005_results-scored-annotated.fix.csv")
 SolomonLabel <- prepareAnnotatedModel("../../Solomon Islands//20131222_004_results-scored-annotated.fix.csv")
 SouthCarolinaLabel <- prepareAnnotatedModel("../../South Carolina//20131220_002_results-scored-annotated.fix.csv")
 
+modTerms <- c("MS1_Score", "Calc_mass", "Glycopeptide_identifier", row.names(attr(terms(testFormula), 'factors')))
+
 labelData <- list(USSRLabel = USSRLabel, SolomonLabel = SolomonLabel, 
                   SouthCarolinaLabel = SouthCarolinaLabel, Merged = 
-                    rbind(model.frame(testFormula, USSRLabel), model.frame(testFormula, SolomonLabel), model.frame(testFormula, SouthCarolinaLabel)))
+                    as.data.frame(rbind(USSRLabel[,modTerms], SolomonLabel[,modTerms], 
+                                        SouthCarolinaLabel[,modTerms])))
 
-#USSRData <- loadDir("../../USSR/", includeAnno = F)
-#SolomonData <- loadDir("../../Solomon Islands//", includeAnno = F)
-#SouthCarolina <- loadDir("../../South Carolina/", includeAnno = F)
+USSRData <- loadDir("../../USSR/", includeAnno = F)
+SolomonData <- loadDir("../../Solomon Islands//", includeAnno = F)
+SouthCarolina <- loadDir("../../South Carolina/", includeAnno = F)
 ```
 
 ## Fit Forests on Labeled Data
@@ -72,15 +81,19 @@ labelForests <- lapply(names(labelData), function(d){
   return(rf)
 })
 
-names(labelForests) <- names(labelData)
+names(labelForests) <- paste(names(labelData), 'forest', sep = '-')
 ```
 
-```{r tests}
+```{r tests, include=FALSE}
 newLabels <- lapply(labelData, function(dataSet){
   lapply(labelForests, function(fit){
+      testData <- dataSet
+      testData$MS2_Score <- predict(fit, dataSet, "prob")[,"Yes"]
+      testData$predCall <- labelCall(testData$MS2_Score > 0.5)
+      
       list(check = checkModel(dataSet=dataSet, modelPred=predict(fit, dataSet, type="prob"))
-           #,
-#        fNeg = getFalseNegatives(dataSet=dataSet, modelPred=predict(fit, dataSet, type="prob")),
+       ,pred = testData
+#        ,fNeg = getFalseNegatives(dataSet=dataSet, modelPred=predict(fit, dataSet, type="prob")),
 #        fPos = getFalsePositives(dataSet=dataSet, modelPred=predict(fit, dataSet, type="prob")),
 #        tPos = getTruePositives(dataSet=dataSet, modelPred=predict(fit, dataSet, type="prob")),
 #        tNeg = getTrueNegatives(dataSet=dataSet, modelPred=predict(fit, dataSet, type="prob"))
@@ -92,18 +105,42 @@ newLabels <- unlist(newLabels, recursive = F)
 ```
 
 
-```{r error-table, results='asis'}
+```{r error-table, results='asis', echo=F}
 errorTable <- as.data.frame(do.call(rbind, lapply(newLabels, function(x){unlist(x$check)})))
 errorTable <- name_rows(errorTable)
 errorTable$TPR <- with(errorTable, TruePositive/(TruePositive + FalseNegative))
 errorTable <- arrange(errorTable, TPR, -FPR)
 
+cat("### Error Table of Labeled Components")
 kable(errorTable)
+
+saveRDS(object = errorTable, file = paste("SavedData/errorTable-", RUN_ID, ".rds", sep =''))
+
 ```
 
+## Summary Plots
 ```{r error-plot}
-ggplot(errorTable, aes(size = TruePositive/.numYes,  y = FalsePositive, x = FalseNegative, color = ErrorRate, label = zapsmall(TruePositive/.numYes, 3))) + geom_point() + scale_size(range = c(4,10))
+ggplot(errorTable, aes(size = TPR,  y = FPR, x = FalseNegative/(FalseNegative + TruePositive), color = .rownames, shape = sapply(sapply(.rownames, function(rn){strsplit(rn, ".", T)}), `[`,1), label = zapsmall(TruePositive/.numYes, 3))) + geom_point() + scale_size(range = c(4,10)) + guides(col = guide_legend(ncol = 2, byrow = TRUE))
 
-ggplot(errorTable, aes(y = TPR, x = FPR, size = ErrorRate, color = .rownames)) + geom_point(position="jitter") + scale_size(range = c(4,10)) 
+ggplot(errorTable, aes(y = TPR, x = FPR, size = ErrorRate, color = .rownames)) + geom_point(position="jitter") + scale_size(range = c(4,10)) + guides(col = guide_legend(ncol = 2, byrow = TRUE))
+```
+
+## Positive Entities
+```{r ambiguity-table, asis=T, results='asis',echo=F}
+bestScoringSequences = lapply(names(newLabels), function(lab){
+  vals <- newLabels[[lab]]
+  data <- vals$pred
+  data$oldCall <- data$call
+  data$call <- data$predCall
+  data <- labelAmbiguity(data)  
+  ambig <- numAmbiguous(data)
+  cat("### ",lab,'\n')
+  cat("Entities Positive: ", ambig$n,'\n')
+  kable(ambig$counts)
+  ambig$counts
+})
+
+names(bestScoringSequences) <- names(newLabels)
+
 ```
 

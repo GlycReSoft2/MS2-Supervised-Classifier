@@ -30,37 +30,71 @@ shimPercentCalcs <- function(dataSet){
   results
 }
 
-resolveCall <- function(potentialCalls){  
-  # If there is either no ambiguity or none of the potentials are good calls
-  if((nrow(potentialCalls) == 1) || !any(potentialCalls$call)){
+# resolveCall <- function(potentialCalls){  
+#   # If there is either no ambiguity or none of the potentials are good calls
+#   if((nrow(potentialCalls) == 1) || !any(potentialCalls$call)){
+#     return(potentialCalls)
+#   }
+#   bestScoreCov <- max(potentialCalls$bestCoverage)  
+#   realThing <- potentialCalls$bestCoverage == bestScoreCov
+#   if( ((bestScoreCov  < .4) || (sum(realThing) > 1)) &&
+#       (any(potentialCalls$numStubs > 0))
+#     ){
+#     bestScoreStubs <- max(potentialCalls$numStubs)
+#     contenders <- cbind(potentialCalls$bestCoverage == bestScoreCov,
+#                     potentialCalls$numStubs == bestScoreStubs)
+#     realThing <- apply(contenders, 1, all)
+#     if(sum(realThing) > 1){
+#       bestScoreOxIons <- max(potentialCalls$numOxIons)
+#       contenders <- cbind(contenders, potentialCalls$numOxIons == bestScoreOxIons)
+#       realThing <- apply(contenders, 1, all)
+#     }
+#   }
+#   realThing <- which.max(realThing)
+#   potentialCalls$call <- F
+#   potentialCalls$call[realThing] <- T  
+#   
+#   return(potentialCalls)
+# }
+
+resolveCall <- function(potentialCalls){
+  if((nrow(potentialCalls) == 1) || !any(potentialCalls$call == "Yes")){
     return(potentialCalls)
   }
-  bestScoreCov <- max(potentialCalls$bestCoverage)  
-  realThing <- potentialCalls$bestCoverage == bestScoreCov
-  if( ((bestScoreCov  < .4) || (sum(realThing) > 1)) &&
-      (any(potentialCalls$numStubs > 0))
-    ){
-    bestScoreStubs <- max(potentialCalls$numStubs)
-    contenders <- cbind(potentialCalls$bestCoverage == bestScoreCov,
-                    potentialCalls$numStubs == bestScoreStubs)
-    realThing <- apply(contenders, 1, all)
-    if(sum(realThing) > 1){
-      bestScoreOxIons <- max(potentialCalls$numOxIons)
-      contenders <- cbind(contenders, potentialCalls$numOxIons == bestScoreOxIons)
-      realThing <- apply(contenders, 1, all)
-    }
-  }
-  realThing <- which.max(realThing)
-  potentialCalls$call <- F
-  potentialCalls$call[realThing] <- T  
-  
-  return(potentialCalls)
+  o <- with(potentialCalls, order(MS2_Score, numStubs, meanCoverage, 
+                                  -percentUncovered, peptideLens,
+                                  -abs_ppm_error, 
+                                  X.b_ion_with_HexNAc_coverage, 
+                                  X.y_ion_with_HexNAc_coverage, decreasing = T))
+  sortedCalls <- potentialCalls[o,]
+  sortedCalls$ambiguity <- T
+  return(sortedCalls)
 }
 
-resolveAmbiguity <- function(dataSet){
+labelAmbiguity <- function(dataSet){
+  if(!("ambiguity" %in% colnames(dataSet))){
+    dataSet$ambiguity <- F
+  }
   # Group by unique identifier pairing of MS1 Score and Mass
   entities <- ddply(dataSet, c("MS1_Score", "Calc_mass"), resolveCall)
   return(entities)
+}
+
+numAmbiguous <- function(dataSet){
+  #if(!("ambiguity" %in% colnames(dataSet))) stop("Data must have been marked ambiguous first!")
+  res <- dataSet[dataSet$ambiguity,]
+  res <- ddply(res, 
+        c("MS1_Score", "Calc_mass"),
+        function(ent){
+          print(ent)
+          count <- nrow(ent)
+          bestSeq <- ent[1, "Glycopeptide_identifier"]
+          worstScore <- min(ent[,"MS2_Score"])
+          bestScore <- max(ent[,"MS2_Score"])
+          data.frame(count = count, bestSeq = bestSeq, 
+                     worstScore = worstScore, bestScore = bestScore)
+        })
+  return(list(n = nrow(res), counts = res))
 }
 
 numOxoniumIons <- function(dataSet){
@@ -103,7 +137,7 @@ prepareModelHandler <- function(modelFile, includeAnno = F){
   }
 }
 
-prepareModel <- function(modelFile, readFile = T, call = T){
+prepareModel <- function(modelFile, readFile = T, call = T, classifierFn = NULL){
   if(readFile){
     rawDataSet <- read.csv(modelFile, stringsAsFactors = F)  
   } else {
@@ -114,12 +148,15 @@ prepareModel <- function(modelFile, readFile = T, call = T){
   nStubsDataSet <- numStubs(nOxDataSet)
   preparedDataSet <- getIonCoverageScore(nStubsDataSet)
   if(call){
-    calledDataSet <- resolveAmbiguity(decideCoverage(preparedDataSet))  
-    calledDataSet$call <- labelCall(calledDataSet$call)  
+    if(!is.null(classifierFn)){
+      calledDataSet <- classifierFn(preparedDataSet)
+    } else{
+      calledDataSet <- decideCoverage(preparedDataSet)
+      calledDataSet$call <- labelCall(calledDataSet$call)  
+    }
     return(calledDataSet)
   }
   return(preparedDataSet)
-  
 }
 
 #' Prepare a model frame from a manually annotated data file.

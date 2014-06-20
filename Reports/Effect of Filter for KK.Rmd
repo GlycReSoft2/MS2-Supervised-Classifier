@@ -29,13 +29,13 @@ matchedUSSR$call <- predict(labelForest, matchedUSSR)
 filtForest <- randomForest(complexModelFormulaWithInteractions, filtUSSR, mtry=6, ntree=5000, importance=T)
 repForest <- randomForest(complexModelFormulaWithInteractions, repUSSR, mtry=6, ntree=5000, importance=T)
 matchForest <- randomForest(complexModelFormulaWithInteractions, matchedUSSR, mtry=6, ntree=5000, importance=T)
-solomonForest <- 
 
+checkSelf <- unlist(checkModel(labelUSSR, predict(labelForest, labelUSSR, 'prob')))
 checkFilt <- unlist(checkModel(labelUSSR, predict(filtForest, labelUSSR, 'prob')))
 checkRep <- unlist(checkModel(labelUSSR, predict(repForest, labelUSSR, 'prob')))
 checkMatch <- unlist(checkModel(labelUSSR, predict(matchForest, labelUSSR, 'prob')))
 
-errorTable <- name_rows(as.data.frame(rbind(checkMatch,checkFilt, checkRep)))
+errorTable <- name_rows(as.data.frame(rbind(checkSelf, checkMatch,checkFilt, checkRep)))
 ggplot(errorTable, aes(size = TruePositive/.numYes,  y = FalsePositive, x = FalseNegative, color = ErrorRate, shape = .rownames)) + geom_point() + scale_size(range = c(4,10))
 
 print(errorTable)
